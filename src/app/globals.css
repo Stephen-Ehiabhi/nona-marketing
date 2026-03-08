@@ -35,3 +35,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Glassmorphism navbar */
+.glass-nav {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* Floating phone */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+

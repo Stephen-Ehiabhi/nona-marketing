@@ -44,3 +44,36 @@ export default function Navbar() {
           </a>
         </div>
 
+        {/* Mobile burger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden relative w-8 h-8 flex items-center justify-center"
+          aria-label="Toggle menu"
+        >
+          <span
+            className={`absolute block w-5 h-[1.5px] bg-black transition-all duration-300 ${
+              open ? "rotate-45" : "-translate-y-[5px]"
+            }`}
+          />
+          <span
+            className={`absolute block w-5 h-[1.5px] bg-black transition-all duration-300 ${
+              open ? "opacity-0 scale-0" : ""
+            }`}
+          />
+          <span
+            className={`absolute block w-5 h-[1.5px] bg-black transition-all duration-300 ${
+              open ? "-rotate-45" : "translate-y-[5px]"
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${
+          open ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-white border-t border-gray-100 px-5 py-6 flex flex-col gap-1">
+          {["Features", "How It Works", "Pricing", "FAQ"].map((item) => (
+            <a

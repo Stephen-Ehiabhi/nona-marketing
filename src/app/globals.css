@@ -47,3 +47,5 @@ body {
   50% { transform: translateY(-12px); }
 }
 
+.phone-float {
+  animation: float 6s ease-in-out infinite;

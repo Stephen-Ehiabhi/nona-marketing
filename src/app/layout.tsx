@@ -16,3 +16,25 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+export const metadata: Metadata = {
+  title: "Nona — Scan. Plan. Cook.",
+  description:
+    "Point your camera at your kitchen. Nona plans your meals with AI. Scan your fridge, get personalized dinner ideas, and cook with a live AI chef. Less waste, better meals, zero guesswork.",
+  keywords: [
+    "meal planning app",
+    "AI kitchen assistant",
+    "food waste reduction",
+    "recipe suggestions",
+    "smart cooking",
+    "fridge scanner",
+    "inventory tracking",
+    "shopping list generator",
+  ],
+  openGraph: {
+    title: "Nona — Scan. Plan. Cook.",
+    description:
+      "Point your camera at your kitchen. Nona plans your meals with AI.",
+    type: "website",
+  },
+};
+

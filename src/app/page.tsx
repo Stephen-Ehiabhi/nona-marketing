@@ -10,3 +10,13 @@ import FAQ from "@/components/landing/FAQ";
 import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
 
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <PainPoints />
+        <Features />
+        <HowItWorks />
+        <EverydayLives />

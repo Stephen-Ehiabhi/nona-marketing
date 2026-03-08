@@ -77,3 +77,23 @@ export default function Navbar() {
         <div className="bg-white border-t border-gray-100 px-5 py-6 flex flex-col gap-1">
           {["Features", "How It Works", "Pricing", "FAQ"].map((item) => (
             <a
+              key={item}
+              href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+              onClick={() => setOpen(false)}
+              className="py-3 text-base font-medium text-gray-600 hover:text-black transition-colors"
+            >
+              {item}
+            </a>
+          ))}
+          <a
+            href="#download"
+            onClick={() => setOpen(false)}
+            className="mt-3 inline-flex items-center justify-center h-12 px-6 bg-black text-white text-base font-semibold rounded-full"
+          >
+            Get Early Access
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+}

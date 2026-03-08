@@ -20,3 +20,12 @@ export default function Home() {
         <Features />
         <HowItWorks />
         <EverydayLives />
+        <Testimonials />
+        <Pricing />
+        <FAQ />
+        <CTA />
+      </main>
+      <Footer />
+    </>
+  );
+}

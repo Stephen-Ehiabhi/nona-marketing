@@ -161,3 +161,8 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Bottom curve */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gray-50" style={{ borderRadius: "50% 50% 0 0 / 100% 100% 0 0" }} />
+    </section>
+  );
+}

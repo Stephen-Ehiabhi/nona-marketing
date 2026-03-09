@@ -110,3 +110,42 @@ export default function Pricing() {
                 )}
               </div>
 
+              <p className={`mt-3 text-[13px] leading-relaxed ${plan.highlighted ? "text-gray-400" : "text-gray-500"}`}>
+                {plan.description}
+              </p>
+
+              <div className={`mt-6 h-px ${plan.highlighted ? "bg-white/10" : "bg-gray-200"}`} />
+
+              <ul className="mt-6 flex-1 space-y-3.5">
+                {plan.features.map((feature, j) => (
+                  <li key={j} className="flex items-start gap-3 text-[13px]">
+                    <div className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${
+                      plan.highlighted ? "bg-white/15" : "bg-black"
+                    }`}>
+                      <svg
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke={plan.highlighted ? "white" : "white"}
+                        strokeWidth="3"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <span className={plan.highlighted ? "text-gray-300" : "text-gray-600"}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="#download"
+                className={`mt-8 inline-flex items-center justify-center h-[48px] rounded-full text-[13px] font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
+                  plan.highlighted
+                    ? "bg-white text-black hover:shadow-lg hover:shadow-white/20"
+                    : "bg-black text-white hover:bg-gray-800 hover:shadow-lg hover:shadow-black/10"
+                }`}
+              >
+                {plan.cta}

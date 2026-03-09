@@ -72,3 +72,38 @@ export default function HowItWorks() {
                   {step.step}
                 </span>
 
+                {/* Icon */}
+                <div className="mt-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-black text-white transition-transform duration-500 group-hover:scale-110">
+                  {step.icon}
+                </div>
+
+                <h3 className="mt-6 text-xl font-bold md:text-[22px]">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-[14px] text-gray-500 leading-[1.7]">
+                  {step.description}
+                </p>
+
+                {/* Tags */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {step.items.map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium bg-gray-50 border border-gray-100 rounded-full px-3 py-1.5 text-gray-600"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-black" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Connecting line on desktop */}
+        <div className="hidden md:block absolute top-[55%] left-[20%] right-[20%] h-px bg-gray-200 -z-0" />
+      </div>
+    </section>
+  );
+}

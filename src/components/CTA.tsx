@@ -64,3 +64,35 @@ export default function CTA() {
                   <rect x="3" y="11" width="18" height="11" rx="2" />
                   <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
+              ),
+              text: "End-to-end encrypted",
+            },
+            {
+              icon: (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              ),
+              text: "GDPR compliant",
+            },
+            {
+              icon: (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ),
+              text: "Cancel anytime",
+            },
+          ].map((item, i) => (
+            <div key={i} className="flex items-center gap-2.5 text-gray-500">
+              <div className="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center">
+                {item.icon}
+              </div>
+              <span className="text-[12px] font-medium">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

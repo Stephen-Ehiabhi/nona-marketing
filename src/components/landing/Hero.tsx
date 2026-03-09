@@ -119,3 +119,51 @@ export default function Hero() {
               </span>
             </motion.h1>
 
+            <motion.p
+              initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 text-[16px] md:text-[17px] leading-[1.7] text-white/60 max-w-[440px]"
+            >
+              Pick your cuisines, set your diet, scan the kitchen. Nona plans
+              every meal of the week — breakfast, lunch, dinner — and walks you through cooking.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8"
+            >
+              <StoreBadges theme="dark" />
+              <p className="mt-4 text-[12px] text-white/30">
+                Free to download. No credit card required.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Phone — floating with parallax */}
+          <motion.div
+            initial={{ opacity: 0, y: 120, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y: phoneY, scale: phoneScale, rotate: phoneRotate }}
+            className="flex-shrink-0 flex justify-center lg:justify-end mt-12 lg:mt-0 pb-16 md:pb-20"
+          >
+            <div className="phone-float relative">
+              <Image
+                src="/mockups/iphone17-black-home.png"
+                alt="Nona app — personalized meal planning"
+                width={1350}
+                height={2760}
+                unoptimized
+                className="w-[300px] md:w-[380px] lg:w-[420px] h-auto drop-shadow-[0_40px_100px_rgba(0,0,0,0.5)]"
+                priority
+              />
+              {/* Reflection glow */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[60%] h-16 bg-white/[0.04] rounded-full blur-2xl" />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+

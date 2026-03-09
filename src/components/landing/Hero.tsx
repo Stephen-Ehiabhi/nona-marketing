@@ -51,3 +51,71 @@ export default function Hero() {
         <source src="/welcome_bg.mp4" type="video/mp4" />
       </motion.video>
 
+      {/* Portrait video (mobile) */}
+      <motion.video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{ opacity: videoOpacity }}
+        className="absolute inset-0 w-full h-full object-cover md:hidden"
+      >
+        <source src="/welcome_bg_portrait.mp4" type="video/mp4" />
+      </motion.video>
+
+      {/* Multi-layer gradient */}
+      <motion.div
+        style={{ opacity: gradientOpacity }}
+        className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/80"
+      />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.03)_0%,transparent_60%)]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-5 md:px-8">
+        <div className="h-20" />
+
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16 pt-8 md:pt-16 lg:pt-20">
+          {/* Copy */}
+          <div className="flex-1 flex flex-col justify-center lg:pt-12">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-10"
+            >
+              <span className="inline-flex items-center gap-2 border border-white/15 rounded-full px-4 py-2 text-[11px] font-semibold text-white/50 uppercase tracking-[0.15em]">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                AI-Powered Kitchen Companion
+              </span>
+            </motion.div>
+
+            {/* Word-by-word clip reveal */}
+            <motion.h1
+              variants={wordReveal}
+              initial="hidden"
+              animate="visible"
+              className="font-serif font-bold text-white text-[2.75rem] leading-[1] md:text-[4rem] lg:text-[5rem]"
+            >
+              <span className="block overflow-hidden">
+                {line1Words.map((word, i) => (
+                  <motion.span
+                    key={i}
+                    variants={wordChild}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="block overflow-hidden">
+                {line2Words.map((word, i) => (
+                  <motion.span
+                    key={i}
+                    variants={wordChild}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+            </motion.h1>
+

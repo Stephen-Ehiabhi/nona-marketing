@@ -75,3 +75,14 @@ export default function ValueProps() {
                 </span>
               </div>
 
+              <h3 className="mt-4 text-[17px] font-bold">{prop.title}</h3>
+              <p className="mt-2.5 text-[13px] text-gray-400 leading-[1.7]">
+                {prop.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

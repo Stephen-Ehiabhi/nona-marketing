@@ -149,3 +149,11 @@ export default function Pricing() {
                 }`}
               >
                 {plan.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

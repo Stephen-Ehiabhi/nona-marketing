@@ -32,3 +32,35 @@ export default function CTA() {
             <span className="text-gray-500">the last night you wonder.</span>
           </h2>
 
+          <p className="mt-6 text-[15px] md:text-base text-gray-400 leading-[1.7] max-w-md mx-auto">
+            No more staring at the fridge. No more wasted food. No more
+            &ldquo;let&apos;s just order in.&rdquo; Nona makes home cooking
+            the easy option again.
+          </p>
+        </div>
+
+        {/* Email capture */}
+        <div className="reveal mt-10 flex flex-col gap-3 sm:flex-row max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="h-[52px] flex-1 rounded-full border border-gray-700 bg-white/5 px-6 text-[14px] text-white placeholder:text-gray-600 focus:outline-none focus:border-gray-500 focus:bg-white/10 transition-all duration-300"
+          />
+          <button className="h-[52px] rounded-full bg-white px-8 text-[14px] font-semibold text-black hover:bg-gray-100 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:-translate-y-0.5 whitespace-nowrap">
+            Join Waitlist
+          </button>
+        </div>
+
+        <p className="reveal mt-4 text-[12px] text-gray-600">
+          Free forever on the starter plan. No credit card. Unsubscribe whenever.
+        </p>
+
+        {/* Trust indicators */}
+        <div className="reveal mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+          {[
+            {
+              icon: (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>

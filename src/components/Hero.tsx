@@ -115,3 +115,49 @@ export default function Hero() {
               </div>
             </div>
 
+            <div className="absolute -left-8 bottom-[25%] z-20 animate-float delay-500 hidden md:block">
+              <div className="glass-card rounded-2xl px-4 py-3 shadow-lg">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-black flex items-center justify-center">
+                    <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <p className="text-[11px] font-semibold">12 items scanned</p>
+                </div>
+              </div>
+            </div>
+
+            {/* iPhone 17 Pro with real screenshot */}
+            <div className="phone-frame w-[280px] md:w-[300px]">
+              <div className="phone-screen">
+                <Image
+                  src="/screenshots/home.png"
+                  alt="Nona app home screen showing personalized meal recommendations"
+                  width={500}
+                  height={1088}
+                  priority
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats row */}
+        <div className="animate-fade-in-up delay-700 mt-16 md:mt-24 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
+          {[
+            { value: "3x", label: "meals planned daily" },
+            { value: "40%", label: "less food thrown out" },
+            { value: "<2min", label: "from scan to dinner plan" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center py-6 rounded-2xl bg-gray-50 border border-gray-100">
+              <p className="font-serif text-2xl font-extrabold md:text-3xl">{stat.value}</p>
+              <p className="mt-1.5 text-[10px] md:text-xs text-gray-400 uppercase tracking-wider font-medium">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+

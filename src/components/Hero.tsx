@@ -61,3 +61,57 @@ export default function Hero() {
               </a>
             </div>
 
+            {/* Social proof */}
+            <div className="animate-fade-in-up delay-400 mt-10 flex items-center gap-4">
+              <div className="flex -space-x-2">
+                {["MK", "TW", "AS", "JN", "PD"].map((initials, i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-500"
+                  >
+                    {initials}
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <svg key={i} className="w-3.5 h-3.5 text-black" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-[11px] text-gray-400 mt-0.5">
+                  Trusted by 500+ early testers
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Phone mockups with real screenshots */}
+          <div className="animate-fade-in-up delay-500 mt-14 lg:mt-0 flex justify-center lg:justify-end relative">
+            {/* Floating badges around phone */}
+            <div className="absolute -left-4 top-[15%] z-20 animate-float hidden md:block">
+              <div className="glass-card rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center text-lg">
+                  🥦
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold">Broccoli detected</p>
+                  <p className="text-[10px] text-gray-400">Fresh &bull; ~300g</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="absolute -right-4 top-[35%] z-20 animate-float delay-300 hidden md:block">
+              <div className="glass-card rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center text-lg">
+                  🧀
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold">Cheddar cheese</p>
+                  <p className="text-[10px] text-gray-400">Exp. in 5 days</p>
+                </div>
+              </div>
+            </div>
+

@@ -101,3 +101,15 @@ export default function Footer() {
           ))}
         </div>
 
+        <div className="mt-14 pt-8 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[12px] text-gray-400">
+            &copy; {new Date().getFullYear()} Nona. All rights reserved.
+          </p>
+          <p className="text-[12px] text-gray-300">
+            Built for people who\u2019d rather cook than scroll for recipes.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

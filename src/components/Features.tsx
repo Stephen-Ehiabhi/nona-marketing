@@ -83,3 +83,29 @@ export default function Features() {
                 </div>
               </div>
 
+              {/* Content */}
+              <div className={`flex-1 max-w-lg ${i % 2 === 0 ? "reveal-right" : "reveal-left"}`}>
+                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full">
+                  {feature.label}
+                </span>
+                <h3 className="mt-5 font-serif text-[28px] md:text-[36px] font-extrabold leading-[1.15] whitespace-pre-line">
+                  {feature.title}
+                </h3>
+                <p className="mt-5 text-[15px] leading-[1.75] text-gray-500">
+                  {feature.description}
+                </p>
+                <p className="mt-5 inline-flex items-center gap-2 text-[13px] font-semibold text-black">
+                  <span className="inline-flex w-5 h-5 rounded-full bg-black items-center justify-center">
+                    <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span>
+                  {feature.highlight}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );

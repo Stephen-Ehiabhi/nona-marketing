@@ -42,3 +42,44 @@ const features = [
   },
 ];
 
+export default function Features() {
+  useReveal();
+
+  return (
+    <section id="features" className="bg-gray-50 py-20 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        {/* Section header */}
+        <div className="text-center mb-20 md:mb-28 reveal">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+            Features
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[48px] font-extrabold leading-[1.1] max-w-lg mx-auto">
+            One app replaces{" "}
+            <span className="text-gray-300">the guesswork.</span>
+          </h2>
+        </div>
+
+        {/* Alternating feature sections */}
+        <div className="space-y-24 md:space-y-40">
+          {features.map((feature, i) => (
+            <div
+              key={i}
+              className={`flex flex-col items-center gap-12 md:gap-16 lg:gap-20 ${
+                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              }`}
+            >
+              {/* Phone mockup with real screenshot */}
+              <div className={`flex-shrink-0 ${i % 2 === 0 ? "reveal-left" : "reveal-right"}`}>
+                <div className="phone-frame w-[260px] md:w-[280px]">
+                  <div className="phone-screen">
+                    <Image
+                      src={feature.screenshot}
+                      alt={feature.alt}
+                      width={500}
+                      height={1088}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+

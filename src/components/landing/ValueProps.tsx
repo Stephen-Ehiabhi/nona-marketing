@@ -66,3 +66,31 @@ export default function ValueProps() {
           </h2>
         </motion.div>
 
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+        >
+          {props.map((prop, i) => (
+            <motion.div
+              key={i}
+              variants={item}
+              className="group rounded-2xl border border-white/[0.08] bg-white/[0.03] p-7 md:p-8 transition-all duration-500 hover:bg-white/[0.06] hover:border-white/[0.14]"
+            >
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-[42px] md:text-[48px] font-bold leading-none text-white">
+                  {prop.stat}
+                </span>
+                <span className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide">{prop.statLabel}</span>
+              </div>
+              <h3 className="mt-4 text-[16px] font-bold text-white">{prop.title}</h3>
+              <p className="mt-3 text-[13px] text-gray-500 leading-[1.7]">{prop.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}

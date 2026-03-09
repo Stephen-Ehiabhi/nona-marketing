@@ -52,3 +52,52 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Links */}
+          {[
+            {
+              title: "Product",
+              links: [
+                { label: "Features", href: "#features" },
+                { label: "Pricing", href: "#pricing" },
+                { label: "FAQ", href: "#faq" },
+                { label: "Waitlist", href: "#download" },
+              ],
+            },
+            {
+              title: "Company",
+              links: [
+                { label: "About", href: "#" },
+                { label: "Blog", href: "#" },
+                { label: "Careers", href: "#" },
+                { label: "Contact", href: "#" },
+              ],
+            },
+            {
+              title: "Legal",
+              links: [
+                { label: "Privacy", href: "#" },
+                { label: "Terms", href: "#" },
+                { label: "Cookies", href: "#" },
+              ],
+            },
+          ].map((group) => (
+            <div key={group.title}>
+              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-5">
+                {group.title}
+              </p>
+              <ul className="space-y-3.5">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-[13px] text-gray-500 hover:text-black transition-colors duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+

@@ -41,3 +41,39 @@ const faqs = [
   },
 ];
 
+export default function FAQ() {
+  useReveal();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section id="faq" className="bg-gray-50 py-20 md:py-32">
+      <div className="mx-auto max-w-3xl px-5 md:px-8">
+        <div className="text-center mb-14 md:mb-20 reveal">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+            FAQ
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[48px] font-extrabold leading-[1.1]">
+            You&apos;re probably wondering.
+          </h2>
+          <p className="mt-4 text-[15px] text-gray-500">
+            The honest answers.
+          </p>
+        </div>
+
+        <div className="space-y-3 stagger-children">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              className={`reveal rounded-[16px] border bg-white overflow-hidden transition-all duration-300 ${
+                openIndex === i
+                  ? "border-gray-300 shadow-lg shadow-black/5"
+                  : "border-gray-200 hover:border-gray-300"
+              }`}
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="flex w-full items-center justify-between p-5 md:p-6 text-left group"
+              >
+                <span className="text-[15px] font-semibold pr-6 group-hover:text-black transition-colors">
+                  {faq.question}
+                </span>

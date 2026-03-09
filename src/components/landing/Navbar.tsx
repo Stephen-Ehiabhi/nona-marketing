@@ -101,3 +101,18 @@ export default function Navbar() {
               ))}
               <motion.a
                 href="#beta-signup"
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-3 flex items-center justify-center h-11 bg-black text-white text-[14px] font-semibold rounded-full"
+              >
+                Get Early Access
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+}

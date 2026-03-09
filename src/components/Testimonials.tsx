@@ -63,3 +63,27 @@ export default function Testimonials() {
                 </span>
               </div>
 
+              {/* Quote */}
+              <p className="text-[14px] font-medium leading-[1.7] text-gray-700 min-h-[80px]">
+                &ldquo;{story.quote}&rdquo;
+              </p>
+
+              {/* Author */}
+              <div className="mt-6 pt-5 border-t border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-[11px] font-bold text-gray-500">
+                    {story.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div>
+                    <p className="text-[12px] font-bold">{story.name}</p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">{story.role}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

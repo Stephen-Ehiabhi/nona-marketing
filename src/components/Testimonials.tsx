@@ -33,3 +33,33 @@ const stories = [
   },
 ];
 
+export default function Testimonials() {
+  useReveal();
+
+  return (
+    <section className="bg-white py-20 md:py-32 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <div className="text-center mb-16 md:mb-20 reveal">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-5">
+            Real Stories
+          </p>
+          <h2 className="font-serif text-[32px] md:text-[48px] font-extrabold leading-[1.1] max-w-lg mx-auto">
+            People are cooking{" "}
+            <span className="text-gray-300">differently now.</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 stagger-children">
+          {stories.map((story, i) => (
+            <div
+              key={i}
+              className="reveal group rounded-[20px] border border-gray-200 bg-white p-6 md:p-7 transition-all duration-500 hover:border-gray-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1"
+            >
+              {/* Scenario badge */}
+              <div className="flex items-center gap-2.5 mb-5">
+                <span className="text-2xl">{story.emoji}</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 bg-gray-50 px-2.5 py-1 rounded-full">
+                  {story.scenario}
+                </span>
+              </div>
+

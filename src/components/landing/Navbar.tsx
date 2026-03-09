@@ -72,3 +72,32 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Subtle bottom line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden overflow-hidden bg-white border-b border-gray-100"
+          >
+            <div className="px-5 pb-5 pt-1">
+              {links.map((link, i) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 + 0.1 }}
+                  className="block py-3 text-[15px] font-medium text-gray-600 border-b border-gray-50 last:border-0"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <motion.a
+                href="#beta-signup"

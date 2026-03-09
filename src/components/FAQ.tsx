@@ -77,3 +77,33 @@ export default function FAQ() {
                 <span className="text-[15px] font-semibold pr-6 group-hover:text-black transition-colors">
                   {faq.question}
                 </span>
+                <div
+                  className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    openIndex === i
+                      ? "bg-black text-white rotate-180"
+                      : "bg-gray-100 text-gray-400"
+                  }`}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </button>
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  openIndex === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <p className="px-5 md:px-6 pb-5 md:pb-6 text-[14px] text-gray-500 leading-[1.8]">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

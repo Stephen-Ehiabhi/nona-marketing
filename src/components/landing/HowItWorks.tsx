@@ -76,3 +76,31 @@ function StepCard({ step, index }: { step: typeof steps[0]; index: number }) {
   );
 }
 
+export default function HowItWorks() {
+  return (
+    <section id="how-it-works" className="bg-gray-50 py-14 md:py-28">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="font-serif text-[1.75rem] md:text-[2.5rem] font-bold text-black leading-[1.1]"
+          >
+            Set up once. Eat well forever.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[15px] text-gray-400 max-w-xs"
+          >
+            Takes 2 minutes to set up. Plans meals for life.
+          </motion.p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {steps.map((step, i) => (
+            <StepCard key={i} step={step} index={i} />

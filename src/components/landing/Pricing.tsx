@@ -156,3 +156,12 @@ export default function Pricing() {
           </motion.p>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {plans.map((plan, i) => (
+            <PricingCard key={i} plan={plan} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

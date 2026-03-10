@@ -62,3 +62,44 @@ function ScenarioCard({ scenario, index }: { scenario: typeof scenarios[0]; inde
           </div>
         </div>
 
+        {/* Badge floating top */}
+        <div className="absolute top-4 left-4 z-20">
+          <span className="inline-flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 text-[11px] font-semibold text-black shadow-lg">
+            <span className="w-1.5 h-1.5 rounded-full bg-black" />
+            {scenario.badge}
+          </span>
+        </div>
+      </div>
+
+      {/* Text below */}
+      <div className="mt-5">
+        <h3 className="font-serif text-[1.1rem] md:text-[1.2rem] font-bold text-white leading-[1.2]">
+          {scenario.title}
+        </h3>
+        <p className="mt-2 text-[13px] leading-[1.7] text-white/45">
+          {scenario.body}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function EverydayLives() {
+  return (
+    <section className="bg-black py-14 md:py-28">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-14 md:mb-16"
+        >
+          <p className="font-serif text-[1.75rem] md:text-[2.5rem] font-bold text-white leading-[1.1]">
+            A day with Nona.
+          </p>
+          <p className="mt-3 text-[15px] text-white/40 max-w-lg mx-auto">
+            From the moment you wake up to the last dish of the day — every meal is handled.
+          </p>
+        </motion.div>
+

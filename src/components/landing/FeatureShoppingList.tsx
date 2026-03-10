@@ -45,3 +45,24 @@ export default function FeatureShoppingList() {
               Shared with your household automatically. No more forgotten ingredients.
             </p>
             <div className="mt-6 space-y-3">
+              {[
+                "Auto-generated from your weekly plan",
+                "Organized by category and store",
+                "Share with family members instantly",
+              ].map((feat, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-forest flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[13px] font-medium text-warm-600">{feat}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

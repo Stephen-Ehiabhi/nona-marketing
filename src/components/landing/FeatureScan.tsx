@@ -49,3 +49,20 @@ export default function FeatureScan() {
             </div>
           </motion.div>
 
+          {/* Phone */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="order-1 md:order-2"
+            style={{ transform: "perspective(1000px) rotateY(-8deg) rotateX(3deg)" }}
+          >
+            <PhoneMockup>
+              <ScanScreen />
+            </PhoneMockup>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );

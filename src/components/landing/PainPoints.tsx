@@ -57,3 +57,18 @@ export default function PainPoints() {
           className="mt-10 md:mt-20 h-px bg-gray-200 origin-left"
         />
 
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 text-[17px] md:text-[20px] text-gray-400 font-serif"
+        >
+          Tell Nona what you like. It plans every meal around what you have.
+          <br />
+          <span className="text-black font-bold">Breakfast. Lunch. Dinner. Handled.</span>
+        </motion.p>
+      </div>
+    </section>
+  );
+}

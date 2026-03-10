@@ -78,3 +78,31 @@ function FeatureRow({ feat, index }: { feat: typeof features[0]; index: number }
   );
 }
 
+export default function Features() {
+  return (
+    <section id="features" className="bg-black py-16 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-16 md:mb-24"
+        >
+          <p className="font-serif text-[1.75rem] md:text-[2.5rem] lg:text-[3rem] font-bold text-white leading-[1.1]">
+            Every meal, figured out.
+          </p>
+          <p className="mt-3 text-[15px] md:text-[16px] text-white/40 max-w-lg mx-auto">
+            From &ldquo;what do I have?&rdquo; to &ldquo;that was delicious&rdquo; — in one app.
+          </p>
+        </motion.div>
+
+        <div className="space-y-20 md:space-y-32">
+          {features.map((feat, i) => (
+            <FeatureRow key={i} feat={feat} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

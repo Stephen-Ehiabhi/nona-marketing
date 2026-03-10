@@ -90,3 +90,41 @@ export default function Testimonials() {
           ))}
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[1.5rem] md:text-[2.5rem] font-bold text-black leading-[1.1] mb-8 md:mb-16"
+        >
+          From people who stopped<br className="hidden md:block" /> guessing what&apos;s for dinner.
+        </motion.p>
+
+        {/* Featured quote */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-10 md:mb-14"
+        >
+          <blockquote className="border-l-2 border-black pl-8 md:pl-10">
+            <p className="font-serif text-[1.25rem] md:text-[1.75rem] font-bold text-black leading-[1.35]">
+              &ldquo;{stories[0].quote}&rdquo;
+            </p>
+            {stories[0].detail && (
+              <p className="mt-3 text-[15px] text-gray-400 leading-[1.7]">
+                {stories[0].detail}
+              </p>
+            )}
+            <footer className="mt-5 text-[13px] text-gray-400">
+              {stories[0].name} &mdash; {stories[0].context}
+            </footer>
+          </blockquote>
+        </motion.div>
+
+        {/* Rest of quotes in grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {stories.slice(1).map((story, i) => (
+            <motion.blockquote
+              key={i}

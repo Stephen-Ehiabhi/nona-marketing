@@ -128,3 +128,26 @@ export default function Testimonials() {
           {stories.slice(1).map((story, i) => (
             <motion.blockquote
               key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="bg-gray-50 rounded-2xl p-6 md:p-7 hover:bg-gray-100 transition-colors duration-300"
+            >
+              <p className="text-[14px] leading-[1.8] text-gray-600">
+                &ldquo;{story.quote}&rdquo;
+              </p>
+              <footer className="mt-4 text-[12px] text-gray-400">
+                {story.name} &mdash; {story.context}
+              </footer>
+            </motion.blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

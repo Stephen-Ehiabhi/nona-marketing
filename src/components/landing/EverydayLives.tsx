@@ -31,3 +31,34 @@ const scenarios = [
   },
 ];
 
+function ScenarioCard({ scenario, index }: { scenario: typeof scenarios[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [50 + index * 10, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0, 1]);
+
+  return (
+    <motion.div ref={ref} style={{ y, opacity }} className="flex flex-col">
+      {/* Card with phone */}
+      <div className="relative bg-gray-900 rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-[3/4] group">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+
+        {/* Phone mockup centered */}
+        <div className="absolute inset-0 flex items-center justify-center p-6 pt-10">
+          <div className="w-[65%] max-w-[220px] transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            <Image
+              src={scenario.mockup}
+              alt={scenario.title}
+              width={1350}
+              height={2760}
+              unoptimized
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+

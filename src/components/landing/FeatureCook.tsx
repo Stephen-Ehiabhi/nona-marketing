@@ -52,3 +52,20 @@ export default function FeatureCook() {
             </div>
           </motion.div>
 
+          {/* Phone */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="order-1 md:order-2"
+            style={{ transform: "perspective(1000px) rotateY(-4deg) rotateX(5deg)" }}
+          >
+            <PhoneMockup>
+              <CookScreen />
+            </PhoneMockup>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );

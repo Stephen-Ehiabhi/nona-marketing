@@ -37,3 +37,42 @@ const steps = [
   },
 ];
 
+function StepCard({ step, index }: { step: typeof steps[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [40 + index * 15, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 1], [0, 0, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, opacity }}
+      className="group relative bg-black rounded-3xl p-8 md:p-10 flex flex-col justify-between min-h-[300px] md:min-h-[340px] overflow-hidden"
+    >
+      {/* Large bg number */}
+      <div className="absolute top-6 right-8 font-serif text-[5rem] md:text-[6rem] font-bold text-white/[0.04] leading-none select-none">
+        {step.num}
+      </div>
+
+      <div className="relative z-10">
+        <div className="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-white/60 group-hover:bg-white/15 transition-colors duration-300">
+          {step.icon}
+        </div>
+      </div>
+
+      <div className="relative z-10">
+        <h3 className="font-serif text-[1.25rem] md:text-[1.4rem] font-bold text-white leading-[1.25] whitespace-pre-line">
+          {step.title}
+        </h3>
+        <p className="mt-3 text-[14px] text-white/50 leading-[1.7]">
+          {step.detail}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+

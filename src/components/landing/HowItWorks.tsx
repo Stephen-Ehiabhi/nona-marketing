@@ -104,3 +104,9 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           {steps.map((step, i) => (
             <StepCard key={i} step={step} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

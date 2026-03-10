@@ -38,3 +38,43 @@ function FeatureRow({ feat, index }: { feat: typeof features[0]; index: number }
     offset: ["start end", "center center"],
   });
 
+  const y = useTransform(scrollYProgress, [0, 1], [60, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 0, 1]);
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, opacity }}
+      className={`flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-16`}
+    >
+      {/* Phone mockup */}
+      <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center">
+        <div className="relative w-[280px] md:w-[320px] lg:w-[360px] group">
+          <Image
+            src={feat.mockup}
+            alt={feat.alt}
+            width={1350}
+            height={2760}
+            unoptimized
+            className="w-full h-auto drop-shadow-[0_20px_60px_rgba(0,0,0,0.4)] transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+          />
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="flex-1 md:max-w-md">
+        <span className="text-[12px] font-semibold text-white/30 uppercase tracking-[0.15em]">
+          0{index + 1}
+        </span>
+        <h3 className="mt-3 font-serif text-[1.5rem] md:text-[2rem] lg:text-[2.25rem] font-bold text-white leading-[1.15]">
+          {feat.title}
+        </h3>
+        <p className="mt-4 text-[15px] md:text-[16px] leading-[1.8] text-white/50">
+          {feat.body}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+

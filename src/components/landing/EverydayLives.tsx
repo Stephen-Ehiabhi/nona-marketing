@@ -103,3 +103,12 @@ export default function EverydayLives() {
           </p>
         </motion.div>
 
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-4 md:gap-5">
+          {scenarios.map((scenario, i) => (
+            <ScenarioCard key={i} scenario={scenario} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

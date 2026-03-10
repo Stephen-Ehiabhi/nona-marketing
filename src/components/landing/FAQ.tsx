@@ -81,3 +81,32 @@ function FAQItem({ faq, index, isOpen, onToggle }: {
   );
 }
 
+export default function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <section id="faq" className="bg-gray-50 py-12 md:py-24">
+      <div className="mx-auto max-w-3xl px-5 md:px-8">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-[1.75rem] md:text-[2.25rem] font-bold text-black leading-[1.15] mb-10 md:mb-12"
+        >
+          Questions.
+        </motion.p>
+
+        <div className="divide-y divide-gray-200">
+          {faqs.map((faq, i) => (
+            <FAQItem
+              key={i}
+              faq={faq}
+              index={i}
+              isOpen={open === i}
+              onToggle={() => setOpen(open === i ? null : i)}
+            />
+          ))}
+        </div>
+      </div>
+

@@ -93,3 +93,66 @@ function PricingCard({ plan, index }: { plan: typeof plans[0]; index: number }) 
         )}
       </div>
 
+      <p className={`mt-2 text-[13px] ${plan.dark ? "text-white/40" : "text-gray-400"}`}>
+        {plan.desc}
+      </p>
+
+      <div className={`my-6 h-px ${plan.dark ? "bg-white/[0.06]" : "bg-gray-200"}`} />
+
+      <ul className="flex-1 space-y-3">
+        {plan.features.map((f) => (
+          <li
+            key={f}
+            className={`text-[13px] flex items-start gap-2.5 ${plan.dark ? "text-white/60" : "text-gray-600"}`}
+          >
+            <svg className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.dark ? "text-white/30" : "text-gray-400"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      <motion.a
+        href="#beta-signup"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        className={`mt-8 inline-flex items-center justify-center h-12 rounded-full text-[13px] font-semibold transition-colors duration-200 ${
+          plan.dark
+            ? "bg-white text-black hover:bg-gray-100"
+            : "bg-black text-white hover:bg-gray-800"
+        }`}
+      >
+        {plan.cta}
+      </motion.a>
+    </motion.div>
+  );
+}
+
+export default function Pricing() {
+  return (
+    <section id="pricing" className="bg-white py-14 md:py-32">
+      <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="font-serif text-[1.75rem] md:text-[2.5rem] font-bold text-black leading-[1.1]">
+              Less than a takeaway.
+            </p>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[15px] text-gray-400 max-w-xs"
+          >
+            Nona pays for itself in the food you stop throwing away.
+          </motion.p>
+        </div>
+

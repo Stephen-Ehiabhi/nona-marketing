@@ -37,3 +37,56 @@ const stats = [
   { num: 20, suffix: "+", label: "cuisines" },
 ];
 
+function AnimatedStat({ stat }: { stat: typeof stats[0] }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const count = useMotionValue(0);
+  const springCount = useSpring(count, { stiffness: 60, damping: 20 });
+
+  useEffect(() => {
+    if (isInView) {
+      animate(count, stat.num, { duration: 1.8, ease: [0.16, 1, 0.3, 1] });
+    }
+  }, [isInView, count, stat.num]);
+
+  useEffect(() => {
+    const unsubscribe = springCount.on("change", (v) => {
+      if (ref.current) {
+        ref.current.textContent = `${Math.round(v)}${stat.suffix}`;
+      }
+    });
+    return unsubscribe;
+  }, [springCount, stat.suffix]);
+
+  return (
+    <div className="text-center">
+      <span
+        ref={ref}
+        className="font-serif text-[2rem] md:text-[2.5rem] font-bold text-black tabular-nums block"
+      >
+        0{stat.suffix}
+      </span>
+      <span className="text-[11px] text-gray-400 uppercase tracking-wider mt-1 block">
+        {stat.label}
+      </span>
+    </div>
+  );
+}
+
+export default function Testimonials() {
+  return (
+    <section className="bg-white py-14 md:py-28">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        {/* Stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 py-8 md:py-14 border-b border-gray-100 mb-10 md:mb-20"
+        >
+          {stats.map((stat) => (
+            <AnimatedStat key={stat.label} stat={stat} />
+          ))}
+        </motion.div>
+

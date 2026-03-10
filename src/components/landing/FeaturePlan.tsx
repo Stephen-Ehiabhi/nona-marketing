@@ -23,3 +23,26 @@ export default function FeaturePlan() {
             </PhoneMockup>
           </motion.div>
 
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 max-w-lg"
+          >
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-burnt-orange bg-burnt-orange/8 px-3 py-1.5 rounded-full">
+              Smart Planning
+            </span>
+            <h2 className="mt-5 font-serif text-[1.75rem] md:text-[2.25rem] font-bold leading-[1.15] text-warm-dark">
+              A week of meals.
+              <br />
+              <span className="text-warm-400">Planned in seconds.</span>
+            </h2>
+            <p className="mt-5 text-[15px] leading-[1.8] text-warm-500">
+              Nona auto-generates a full weekly meal plan based on what&apos;s
+              in your kitchen, your dietary preferences, and what needs to be
+              used first. Swap any meal with a tap. Get notified when it&apos;s
+              time to start cooking.
+            </p>
+            <div className="mt-6 space-y-3">

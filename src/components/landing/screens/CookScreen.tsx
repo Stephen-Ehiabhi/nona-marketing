@@ -45,3 +45,35 @@ export default function CookScreen() {
           </div>
         </div>
 
+        {/* Instruction */}
+        <div className="mt-4 text-center">
+          <h3 className="font-serif text-[15px] font-bold text-warm-dark">Saut&eacute; the onions</h3>
+          <p className="mt-1.5 text-[10px] text-warm-500 leading-relaxed px-3">
+            Heat olive oil over medium heat. Add diced onions and cook until golden, stirring occasionally.
+          </p>
+        </div>
+
+        {/* Ingredient used indicator */}
+        <div className="mt-4 flex items-center justify-center gap-3">
+          <div className="flex items-center gap-2 bg-sage-light/50 rounded-full px-3 py-1.5">
+            <span className="text-xs">🧅</span>
+            <span className="text-[9px] font-semibold text-forest">-1 onion used</span>
+          </div>
+          <div className="flex items-center gap-2 bg-sage-light/50 rounded-full px-3 py-1.5">
+            <span className="text-xs">🫒</span>
+            <span className="text-[9px] font-semibold text-forest">-2 tbsp oil</span>
+          </div>
+        </div>
+
+        {/* Voice control */}
+        <div className="mt-5 flex items-center justify-center gap-3">
+          <button className="w-10 h-10 rounded-full bg-warm-100 flex items-center justify-center">
+            <svg className="w-4 h-4 text-warm-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+            </svg>
+          </button>
+          <button className="w-12 h-12 rounded-full bg-burnt-orange flex items-center justify-center shadow-lg shadow-burnt-orange/30">
+            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" y1="19" x2="12" y2="23" />

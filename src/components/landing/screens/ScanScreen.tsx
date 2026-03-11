@@ -43,3 +43,23 @@ export default function ScanScreen() {
           <p className="text-[8px] text-warm-500">x6</p>
         </div>
 
+        {/* Bottom counter */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-white text-[10px] font-medium">8 items detected</p>
+            <div className="bg-burnt-orange text-white text-[10px] font-bold px-3.5 py-1.5 rounded-full">
+              Done ✓
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Shutter button area */}
+      <div className="flex justify-center py-5">
+        <div className="w-14 h-14 rounded-full border-[3px] border-warm-400 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-burnt-orange" />
+        </div>
+      </div>
+    </div>
+  );
+}

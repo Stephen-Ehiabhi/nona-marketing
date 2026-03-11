@@ -39,3 +39,42 @@ export default function HomeScreen() {
           </div>
         </div>
 
+        {/* Today&apos;s picks label */}
+        <div className="mt-5 flex items-center justify-between">
+          <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-warm-500">
+            Today&apos;s picks
+          </p>
+          <p className="text-[9px] font-medium text-burnt-orange">See all</p>
+        </div>
+
+        {/* Meal cards */}
+        {[
+          { name: "Shakshuka Bowl", time: "25 min", match: "96%", emoji: "🍳", bg: "bg-orange-50" },
+          { name: "Lemon Herb Pasta", time: "18 min", match: "93%", emoji: "🍋", bg: "bg-yellow-50" },
+          { name: "Green Thai Curry", time: "30 min", match: "88%", emoji: "🥬", bg: "bg-green-50" },
+        ].map((meal, i) => (
+          <div
+            key={i}
+            className="mt-2 flex items-center justify-between rounded-[14px] border border-warm-100 bg-white p-3"
+          >
+            <div className="flex items-center gap-3">
+              <div className={`h-9 w-9 rounded-xl ${meal.bg} flex items-center justify-center text-base`}>
+                {meal.emoji}
+              </div>
+              <div>
+                <p className="text-[11px] font-bold text-warm-dark">{meal.name}</p>
+                <p className="text-[9px] text-warm-400 mt-0.5 flex items-center gap-1">
+                  <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  {meal.time}
+                </p>
+              </div>
+            </div>
+            <span className="text-[9px] font-bold bg-sage-light text-forest px-2 py-0.5 rounded-full">
+              {meal.match}
+            </span>
+          </div>
+        ))}
+

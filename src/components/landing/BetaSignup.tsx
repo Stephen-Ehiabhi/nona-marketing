@@ -213,3 +213,21 @@ export default function BetaSignup() {
               </div>
             </div>
 
+            {/* Submit */}
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="btn-shimmer w-full h-14 rounded-full bg-burnt-orange text-white text-[15px] font-bold hover:bg-burnt-orange-dark transition-all duration-300 hover:shadow-xl hover:shadow-burnt-orange/20 hover:-translate-y-0.5 mt-2"
+            >
+              Join the Beta — It&apos;s Free
+            </button>
+
+            <p className="text-center text-[12px] text-warm-600">
+              No credit card required. We&apos;ll never spam you.
+            </p>
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+}

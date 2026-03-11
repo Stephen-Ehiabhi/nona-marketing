@@ -24,3 +24,20 @@ export default function PhoneMockup({
     ? "w-[280px] md:w-[320px] lg:w-[340px]"
     : "w-[250px] md:w-[280px]";
 
+  return (
+    <div className={`iphone-15-pro ${sizeClass} ${className}`} style={style}>
+      {/* Dynamic Island */}
+      <div className="iphone-di" />
+      {/* Screen */}
+      <div className="iphone-screen">
+        {screenshot ? (
+          <Image
+            src={screenshot}
+            alt={alt}
+            width={500}
+            height={1088}
+            className="w-full h-auto block"
+            priority={variant === "hero"}
+          />
+        ) : (
+          children

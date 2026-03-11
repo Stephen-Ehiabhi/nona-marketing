@@ -41,3 +41,13 @@ export default function PhoneMockup({
           />
         ) : (
           children
+        )}
+      </div>
+      {/* Side buttons */}
+      <div className="iphone-btn-r" />
+      <div className="iphone-btn-l1" />
+      <div className="iphone-btn-l2" />
+      <div className="iphone-btn-l3" />
+    </div>
+  );
+}

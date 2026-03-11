@@ -153,3 +153,63 @@ export default function BetaSignup() {
               </select>
             </div>
 
+            {/* Frustration */}
+            <div>
+              <label className="block text-[11px] font-semibold text-warm-400 mb-1.5 uppercase tracking-wider">
+                Biggest kitchen frustration
+              </label>
+              <textarea
+                value={form.frustration}
+                onChange={(e) => setForm({ ...form, frustration: e.target.value })}
+                placeholder="What drives you crazy about cooking at home?"
+                rows={3}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[14px] text-cream placeholder:text-warm-600 focus:outline-none focus:border-burnt-orange/50 focus:bg-white/8 transition-all resize-none"
+              />
+            </div>
+
+            {/* Willingness to pay */}
+            <div>
+              <label className="block text-[11px] font-semibold text-warm-400 mb-2.5 uppercase tracking-wider">
+                What would you pay for this?
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {priceOptions.map((opt) => (
+                  <button
+                    key={opt.value}
+                    type="button"
+                    onClick={() => setForm({ ...form, willingnessToPay: opt.value })}
+                    className={`h-11 rounded-xl text-[13px] font-semibold transition-all ${
+                      form.willingnessToPay === opt.value
+                        ? "bg-burnt-orange text-white border border-burnt-orange"
+                        : "border border-white/10 text-warm-400 hover:border-white/20 hover:text-cream"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Interests */}
+            <div>
+              <label className="block text-[11px] font-semibold text-warm-400 mb-2.5 uppercase tracking-wider">
+                What excites you most? (pick all)
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {interestOptions.map((opt) => (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => toggleInterest(opt.id)}
+                    className={`h-11 rounded-xl text-[13px] font-medium transition-all ${
+                      form.interests.includes(opt.id)
+                        ? "bg-forest text-white border border-forest"
+                        : "border border-white/10 text-warm-400 hover:border-white/20 hover:text-cream"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+

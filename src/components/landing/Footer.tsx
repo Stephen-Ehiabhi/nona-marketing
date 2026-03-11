@@ -18,3 +18,23 @@ export default function Footer() {
             <span className="font-serif text-[15px] font-bold text-white/60">nona</span>
           </div>
 
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {[
+              { label: "Features", href: "#features" },
+              { label: "How It Works", href: "#how-it-works" },
+              { label: "Pricing", href: "#pricing" },
+              { label: "FAQ", href: "#faq" },
+              { label: "Privacy", href: "#" },
+              { label: "Terms", href: "#" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+

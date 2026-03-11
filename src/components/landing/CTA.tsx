@@ -20,3 +20,18 @@ export default function CTA() {
           Tomorrow morning, breakfast will be waiting.
         </motion.p>
 
+        <p className="mt-5 text-[15px] md:text-[16px] text-white/40 leading-[1.7] max-w-md mx-auto">
+          Tell Nona what you like. It plans every meal, every day, from what&apos;s already in your kitchen.
+        </p>
+
+        <div className="mt-8 flex justify-center">
+          <StoreBadges theme="dark" />
+        </div>
+
+        <p className="mt-4 text-[12px] text-white/20">
+          Free to download. No credit card required.
+        </p>
+
+        <div className="mt-8 md:mt-14 flex items-center justify-center gap-4 md:gap-8 text-[11px] md:text-[12px] text-white/20">
+          <span>End-to-end encrypted</span>
+          <span className="w-px h-3 bg-white/10" />

@@ -38,3 +38,10 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="mt-8 pt-6 border-t border-white/[0.04] text-[11px] text-white/15">
+          &copy; {new Date().getFullYear()} Nona. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  );
+}

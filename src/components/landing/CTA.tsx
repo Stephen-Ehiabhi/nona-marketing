@@ -35,3 +35,11 @@ export default function CTA() {
         <div className="mt-8 md:mt-14 flex items-center justify-center gap-4 md:gap-8 text-[11px] md:text-[12px] text-white/20">
           <span>End-to-end encrypted</span>
           <span className="w-px h-3 bg-white/10" />
+          <span>GDPR compliant</span>
+          <span className="w-px h-3 bg-white/10" />
+          <span>Cancel anytime</span>
+        </div>
+      </div>
+    </section>
+  );
+}

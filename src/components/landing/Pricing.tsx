@@ -20,7 +20,7 @@ const plans = [
   },
   {
     name: "Premium",
-    price: "19.99",
+    price: "9.99",
     desc: "Every meal, every day, handled.",
     features: [
       "Unlimited scans (camera, barcode, label)",
@@ -35,7 +35,7 @@ const plans = [
   },
   {
     name: "Family",
-    price: "29.99",
+    price: "19.99",
     desc: "One kitchen. Everyone\u2019s taste covered.",
     features: [
       "Everything in Premium",
@@ -128,6 +128,9 @@ function PricingCard({ plan, index }: { plan: typeof plans[0]; index: number }) 
         }`}
       >
         {plan.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="ml-1.5">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </motion.button>
     </motion.div>
   );

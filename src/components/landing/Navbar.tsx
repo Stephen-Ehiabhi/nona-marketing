@@ -39,9 +39,10 @@ export default function Navbar() {
           ))}
           <button
             onClick={open}
-            className="inline-flex items-center justify-center h-9 px-5 text-[13px] font-semibold rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 cursor-pointer"
+            className="group inline-flex items-center gap-1.5 h-9 px-5 text-[13px] font-semibold rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 cursor-pointer"
           >
             Get Early Access
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </button>
         </div>
 
@@ -96,9 +97,10 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-3 flex items-center justify-center h-11 w-full bg-black text-white text-[14px] font-semibold rounded-full cursor-pointer"
+                className="group mt-3 flex items-center justify-center gap-2 h-11 w-full bg-black text-white text-[14px] font-semibold rounded-full cursor-pointer"
               >
                 Get Early Access
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </motion.button>
             </div>
           </motion.div>

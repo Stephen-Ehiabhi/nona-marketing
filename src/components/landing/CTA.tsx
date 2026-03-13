@@ -29,9 +29,10 @@ export default function CTA() {
         <div className="mt-8">
           <button
             onClick={open}
-            className="h-[52px] px-8 rounded-full bg-white text-black text-[15px] font-semibold hover:bg-white/90 active:scale-[0.97] transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 h-[52px] px-8 rounded-full bg-white text-black text-[15px] font-semibold hover:bg-white/90 active:scale-[0.97] transition-all cursor-pointer"
           >
             Get Early Access
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </button>
         </div>
 

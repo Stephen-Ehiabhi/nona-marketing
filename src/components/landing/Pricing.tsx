@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useSignupModal } from "../SignupModal";
 
 const plans = [
   {
@@ -9,9 +10,9 @@ const plans = [
     price: "0",
     desc: "See how Nona plans your meals.",
     features: [
-      "3 kitchen scans per day",
+      "5 kitchen scans per month",
       "1 meal recommendation / day",
-      "Basic cooking mode",
+      "Basic step-by-step cooking",
       "Single user",
     ],
     cta: "Get Started",
@@ -19,22 +20,22 @@ const plans = [
   },
   {
     name: "Premium",
-    price: "29",
+    price: "19.99",
     desc: "Every meal, every day, handled.",
     features: [
       "Unlimited scans (camera, barcode, label)",
       "Full 7-day meal plans",
-      "Voice-guided cooking + Live Chef",
+      "Voice-guided cooking + Live AI Chef",
       "Expiry alerts & smart shopping lists",
       "Nutrition & calorie tracking",
-      "Cooking streaks & meal history",
+      "35+ cuisines & cooking streaks",
     ],
     cta: "Try Free for 7 Days",
     dark: true,
   },
   {
     name: "Family",
-    price: "49",
+    price: "29.99",
     desc: "One kitchen. Everyone\u2019s taste covered.",
     features: [
       "Everything in Premium",
@@ -50,6 +51,7 @@ const plans = [
 ];
 
 function PricingCard({ plan, index }: { plan: typeof plans[0]; index: number }) {
+  const { open } = useSignupModal();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -85,9 +87,10 @@ function PricingCard({ plan, index }: { plan: typeof plans[0]; index: number }) 
           <span className="font-serif text-[2.75rem] font-bold leading-none">Free</span>
         ) : (
           <>
+            <span className={`text-[16px] font-bold self-start mt-2 ${plan.dark ? "text-white/50" : "text-gray-400"}`}>$</span>
             <span className="font-serif text-[2.75rem] font-bold leading-none">{plan.price}</span>
             <span className={`text-[13px] ${plan.dark ? "text-white/30" : "text-gray-400"}`}>
-              PLN/mo
+              /mo
             </span>
           </>
         )}
@@ -113,19 +116,19 @@ function PricingCard({ plan, index }: { plan: typeof plans[0]; index: number }) 
         ))}
       </ul>
 
-      <motion.a
-        href="#beta-signup"
+      <motion.button
+        onClick={open}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: "spring", stiffness: 400, damping: 20 }}
-        className={`mt-8 inline-flex items-center justify-center h-12 rounded-full text-[13px] font-semibold transition-colors duration-200 ${
+        className={`mt-8 inline-flex items-center justify-center h-12 rounded-full text-[13px] font-semibold transition-colors duration-200 cursor-pointer ${
           plan.dark
             ? "bg-white text-black hover:bg-gray-100"
             : "bg-black text-white hover:bg-gray-800"
         }`}
       >
         {plan.cta}
-      </motion.a>
+      </motion.button>
     </motion.div>
   );
 }

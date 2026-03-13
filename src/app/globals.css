@@ -50,3 +50,10 @@ body {
 .phone-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* 16" MacBook Pro (1728px CSS width) — scale up to match 125% zoom feel */
+@media (min-width: 1700px) and (max-width: 1800px) {
+  html {
+    zoom: 1.25;
+  }
+}

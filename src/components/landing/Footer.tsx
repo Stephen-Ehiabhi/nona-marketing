@@ -1,22 +1,15 @@
 "use client";
 
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-white/[0.04] py-12">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/app-icon-512.png"
-              alt="Nona"
-              width={22}
-              height={22}
-              className="rounded-md"
-            />
-            <span className="font-serif text-[15px] font-bold text-white/60">nona</span>
-          </div>
+          <a href="#" className="group">
+            <span className="font-serif text-[18px] font-bold tracking-[-0.03em] text-white/80 group-hover:text-white transition-colors duration-300">
+              nona<span className="inline-block w-[4px] h-[4px] rounded-full bg-white/50 ml-[2px] mb-[4px] group-hover:bg-white/70 transition-colors duration-300" />
+            </span>
+          </a>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {[
@@ -30,7 +23,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+                className="text-[12px] text-white/50 hover:text-white/70 transition-colors"
               >
                 {link.label}
               </a>
@@ -38,7 +31,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-white/[0.04] text-[11px] text-white/15">
+        <div className="mt-8 pt-6 border-t border-white/[0.06] text-[11px] text-white/40">
           &copy; {new Date().getFullYear()} Nona. All rights reserved.
         </div>
       </div>

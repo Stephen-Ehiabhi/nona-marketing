@@ -1,9 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import StoreBadges from "./StoreBadges";
+import { useSignupModal } from "../SignupModal";
 
 export default function CTA() {
+  const { open } = useSignupModal();
+
   return (
     <section id="beta-signup" className="bg-black py-16 md:py-32 relative overflow-hidden">
       {/* Ambient glow */}
@@ -24,12 +26,17 @@ export default function CTA() {
           Tell Nona what you like. It plans every meal, every day, from what&apos;s already in your kitchen.
         </p>
 
-        <div className="mt-8 flex justify-center">
-          <StoreBadges theme="dark" />
+        <div className="mt-8">
+          <button
+            onClick={open}
+            className="h-[52px] px-8 rounded-full bg-white text-black text-[15px] font-semibold hover:bg-white/90 active:scale-[0.97] transition-all cursor-pointer"
+          >
+            Get Early Access
+          </button>
         </div>
 
         <p className="mt-4 text-[12px] text-white/20">
-          Free to download. No credit card required.
+          Free beta. No credit card required.
         </p>
 
         <div className="mt-8 md:mt-14 flex items-center justify-center gap-4 md:gap-8 text-[11px] md:text-[12px] text-white/20">

@@ -9,10 +9,11 @@ import Pricing from "@/components/landing/Pricing";
 import FAQ from "@/components/landing/FAQ";
 import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
+import { SignupModalProvider } from "@/components/SignupModal";
 
 export default function Home() {
   return (
-    <>
+    <SignupModalProvider>
       <Navbar />
       <main>
         <Hero />
@@ -26,6 +27,6 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
-    </>
+    </SignupModalProvider>
   );
 }

@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { useSignupModal } from "../SignupModal";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { open } = useSignupModal();
 
   const links = [
     { label: "Features", href: "#features" },
@@ -19,18 +20,9 @@ export default function Navbar() {
       className="absolute top-0 left-0 right-0 z-50 bg-transparent"
     >
       <div className="mx-auto max-w-6xl flex items-center justify-between px-5 md:px-8 h-16">
-        <a href="#" className="flex items-center gap-2">
-          <Image
-            src="/app-icon-512.png"
-            alt="Nona"
-            width={28}
-            height={28}
-            className="rounded-lg"
-          />
-          <span
-            className="font-serif text-lg font-bold tracking-tight text-white"
-          >
-            nona
+        <a href="#" className="group">
+          <span className="font-serif text-[22px] font-bold tracking-[-0.03em] text-white">
+            nona<span className="inline-block w-[5px] h-[5px] rounded-full bg-white/50 ml-[2px] mb-[5px] group-hover:bg-white transition-colors duration-300" />
           </span>
         </a>
 
@@ -45,12 +37,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#beta-signup"
-            className="inline-flex items-center justify-center h-9 px-5 text-[13px] font-semibold rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300"
+          <button
+            onClick={open}
+            className="inline-flex items-center justify-center h-9 px-5 text-[13px] font-semibold rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300 cursor-pointer"
           >
             Get Early Access
-          </a>
+          </button>
         </div>
 
         {/* Mobile burger */}
@@ -99,16 +91,15 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
-              <motion.a
-                href="#beta-signup"
-                onClick={() => setMobileOpen(false)}
+              <motion.button
+                onClick={() => { setMobileOpen(false); open(); }}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="mt-3 flex items-center justify-center h-11 bg-black text-white text-[14px] font-semibold rounded-full"
+                className="mt-3 flex items-center justify-center h-11 w-full bg-black text-white text-[14px] font-semibold rounded-full cursor-pointer"
               >
                 Get Early Access
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         )}

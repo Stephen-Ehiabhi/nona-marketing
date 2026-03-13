@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import StoreBadges from "./StoreBadges";
+import { useSignupModal } from "../SignupModal";
 
 const wordReveal = {
   hidden: {},
@@ -22,6 +22,7 @@ const wordChild = {
 };
 
 export default function Hero() {
+  const { open } = useSignupModal();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -133,11 +134,16 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8"
+              className="mt-8 flex flex-col items-start gap-3"
             >
-              <StoreBadges theme="dark" />
-              <p className="mt-4 text-[12px] text-white/30">
-                Free to download. No credit card required.
+              <button
+                onClick={open}
+                className="h-[52px] px-8 rounded-full bg-white text-black text-[15px] font-semibold hover:bg-white/90 active:scale-[0.97] transition-all cursor-pointer"
+              >
+                Get Early Access
+              </button>
+              <p className="text-[12px] text-white/30">
+                Free beta. No credit card required.
               </p>
             </motion.div>
           </div>

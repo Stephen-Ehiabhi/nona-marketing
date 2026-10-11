@@ -182,29 +182,35 @@ export function Reveal({
   );
 }
 
-/* iPhone 17 Pro proportions in a 1000-unit-wide body (buttons stick out
- * 12 units each side, hence the 1024-wide viewBox). Screen is 1206 x 2622
- * px, the body adds a 46-unit black border and a 14-unit metal band. */
-const BODY_H = 2066;
-const SCREEN = { x: 46, y: 46, w: 908, h: 1974, r: 124 };
+/* iPhone 17 Pro proportions in a 1000-unit-wide body (side buttons stick
+ * out 12 units, hence the 1024-wide viewBox). The 1206 x 2622 screenshot
+ * fills a 932 x 2026 display; around it sit a 20-unit black border and a
+ * 14-unit metal band. Display corners match the device's 62pt radius. */
+const BODY_H = 2094;
+const SCREEN = { x: 34, y: 34, w: 932, h: 2026, r: 144 };
+const OUTER_R = SCREEN.r + SCREEN.x;
+const BAND = 14;
 const PHONE_TONES = {
   graphite: {
-    band: ["#5d5e63", "#2b2c2f", "#1b1c1e", "#2e2f33", "#66676c"],
-    edge: "rgba(255,255,255,0.42)",
-    button: ["#2a2b2e", "#6a6b70", "#232427"],
-    antenna: "#8d8e93",
+    band: ["#77787d", "#3a3b3f", "#202124", "#2c2d31", "#6c6d72"],
+    edge: "rgba(255,255,255,0.5)",
+    glassEdge: "rgba(255,255,255,0.14)",
+    button: ["#26272a", "#707176", "#202124"],
+    antenna: "#9a9ba0",
   },
   silver: {
-    band: ["#fbfbfb", "#d4d5d7", "#b9babd", "#d9dadc", "#f5f5f6"],
-    edge: "rgba(255,255,255,0.9)",
-    button: ["#a9aaad", "#f1f1f2", "#9c9da0"],
-    antenna: "#e9e9ea",
+    band: ["#fafafa", "#d9dadc", "#c3c4c7", "#d6d7d9", "#f3f3f4"],
+    edge: "rgba(255,255,255,0.95)",
+    glassEdge: "rgba(255,255,255,0.35)",
+    button: ["#b3b4b7", "#f4f4f5", "#a5a6a9"],
+    antenna: "#ececed",
   },
 } as const;
 
-/** A real app screenshot in a realistic iPhone 17 Pro: metal band with
- *  edge highlights, black border, side buttons, antenna lines, glass glare
- *  and a two-layer shadow. The screenshot carries its own status bar and
+/** A real app screenshot in a realistic iPhone 17 Pro: polished metal band
+ *  with a chamfer highlight, a thin black border, the glass edge catching
+ *  the light, side buttons, antenna lines, soft cover-glass glare and a
+ *  two-layer shadow. The screenshot carries its own status bar and
  *  Dynamic Island. */
 export function PhoneFrame({
   src,
@@ -224,61 +230,82 @@ export function PhoneFrame({
   const t = PHONE_TONES[tone];
   const id = `pf-${tone}`;
   const pct = (v: number, of: number) => `${(v / of) * 100}%`;
+  const button = (side: "l" | "r", top: number, height: number, width = 14) => (
+    <rect
+      x={side === "l" ? -9 : 1009 - width}
+      y={top * BODY_H}
+      width={width}
+      height={height * BODY_H}
+      rx={width / 2.4}
+      fill={`url(#${id}-btn-${side})`}
+    />
+  );
   return (
     <div
       className={`relative ${className}`}
       style={{
         aspectRatio: `1024 / ${BODY_H}`,
         filter: shadow
-          ? "drop-shadow(0 46px 48px rgba(15,14,13,0.28)) drop-shadow(0 10px 14px rgba(15,14,13,0.22))"
+          ? "drop-shadow(0 50px 50px rgba(15,14,13,0.26)) drop-shadow(0 12px 14px rgba(15,14,13,0.2))"
           : undefined,
       }}
     >
-      <svg
-        viewBox={`-12 0 1024 ${BODY_H}`}
-        className="absolute inset-0 h-full w-full"
-        aria-hidden
-      >
+      <svg viewBox={`-12 0 1024 ${BODY_H}`} className="absolute inset-0 h-full w-full" aria-hidden>
         <defs>
           <linearGradient id={`${id}-band`} x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stopColor={t.band[0]} />
-            <stop offset="0.18" stopColor={t.band[1]} />
+            <stop offset="0.16" stopColor={t.band[1]} />
             <stop offset="0.5" stopColor={t.band[2]} />
-            <stop offset="0.82" stopColor={t.band[3]} />
+            <stop offset="0.84" stopColor={t.band[3]} />
             <stop offset="1" stopColor={t.band[4]} />
           </linearGradient>
-          <linearGradient id={`${id}-btn`} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor={t.button[0]} />
-            <stop offset="0.55" stopColor={t.button[1]} />
-            <stop offset="1" stopColor={t.button[2]} />
-          </linearGradient>
-          <linearGradient id={`${id}-btn-r`} x1="1" y1="0" x2="0" y2="0">
-            <stop offset="0" stopColor={t.button[0]} />
-            <stop offset="0.55" stopColor={t.button[1]} />
-            <stop offset="1" stopColor={t.button[2]} />
-          </linearGradient>
+          <radialGradient id={`${id}-spec`} cx="0.12" cy="0.04" r="0.5">
+            <stop offset="0" stopColor="#fff" stopOpacity="0.35" />
+            <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          </radialGradient>
+          {(["l", "r"] as const).map((side) => (
+            <linearGradient key={side} id={`${id}-btn-${side}`} x1={side === "l" ? 0 : 1} y1="0" x2={side === "l" ? 1 : 0} y2="0">
+              <stop offset="0" stopColor={t.button[0]} />
+              <stop offset="0.55" stopColor={t.button[1]} />
+              <stop offset="1" stopColor={t.button[2]} />
+            </linearGradient>
+          ))}
         </defs>
 
-        {/* Side buttons: action, volume up, volume down (left); side button
-            and Camera Control (right). */}
-        <rect x="-9" y="372" width="14" height="104" rx="6" fill={`url(#${id}-btn)`} />
-        <rect x="-9" y="548" width="14" height="182" rx="6" fill={`url(#${id}-btn)`} />
-        <rect x="-9" y="762" width="14" height="182" rx="6" fill={`url(#${id}-btn)`} />
-        <rect x="995" y="640" width="14" height="292" rx="6" fill={`url(#${id}-btn-r)`} />
-        <rect x="997" y="1240" width="11" height="214" rx="5" fill={`url(#${id}-btn-r)`} />
+        {/* Action button, volume up and down (left); side button and
+            Camera Control (right). */}
+        {button("l", 0.178, 0.049)}
+        {button("l", 0.262, 0.086)}
+        {button("l", 0.366, 0.086)}
+        {button("r", 0.306, 0.138)}
+        {button("r", 0.592, 0.1, 11)}
 
-        {/* Metal band and black border */}
-        <rect x="0" y="0" width="1000" height={BODY_H} rx="170" fill={`url(#${id}-band)`} />
-        <rect x="2.5" y="2.5" width="995" height={BODY_H - 5} rx="167.5" fill="none" stroke={t.edge} strokeWidth="2.5" />
-        <rect x="13" y="13" width="974" height={BODY_H - 26} rx="157" fill="#030303" />
-        <rect x="13" y="13" width="974" height={BODY_H - 26} rx="157" fill="none" stroke="rgba(0,0,0,0.85)" strokeWidth="3" />
+        {/* Metal band */}
+        <rect x="0" y="0" width="1000" height={BODY_H} rx={OUTER_R} fill={`url(#${id}-band)`} />
+        <rect x="0" y="0" width="1000" height={BODY_H} rx={OUTER_R} fill={`url(#${id}-spec)`} />
+        <rect x="2" y="2" width="996" height={BODY_H - 4} rx={OUTER_R - 2} fill="none" stroke={t.edge} strokeWidth="2.5" />
 
         {/* Antenna lines across the band */}
-        <rect x="0" y="232" width="13" height="7" fill={t.antenna} opacity="0.55" />
-        <rect x="987" y="232" width="13" height="7" fill={t.antenna} opacity="0.55" />
-        <rect x="0" y={BODY_H - 239} width="13" height="7" fill={t.antenna} opacity="0.55" />
-        <rect x="987" y={BODY_H - 239} width="13" height="7" fill={t.antenna} opacity="0.55" />
-        <rect x="300" y={BODY_H - 13} width="7" height="13" fill={t.antenna} opacity="0.55" />
+        {[0.112, 0.888].map((y) => (
+          <g key={y} fill={t.antenna} opacity="0.5">
+            <rect x="0" y={y * BODY_H} width={BAND} height="7" />
+            <rect x={1000 - BAND} y={y * BODY_H} width={BAND} height="7" />
+          </g>
+        ))}
+        <rect x="300" y={BODY_H - BAND} width="7" height={BAND} fill={t.antenna} opacity="0.5" />
+
+        {/* Black border under the glass, and the glass edge catching light */}
+        <rect x={BAND} y={BAND} width={1000 - BAND * 2} height={BODY_H - BAND * 2} rx={OUTER_R - BAND} fill="#020202" />
+        <rect
+          x={BAND + 1}
+          y={BAND + 1}
+          width={1000 - BAND * 2 - 2}
+          height={BODY_H - BAND * 2 - 2}
+          rx={OUTER_R - BAND - 1}
+          fill="none"
+          stroke={t.glassEdge}
+          strokeWidth="2"
+        />
       </svg>
 
       {/* Display */}
@@ -299,12 +326,8 @@ export function PhoneFrame({
           decoding="async"
           className="h-full w-full object-cover object-top"
         />
-        {/* Cover glass: a soft diagonal glare and a hairline at the edge */}
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(255,255,255,0.13)_0%,rgba(255,255,255,0.04)_26%,rgba(255,255,255,0)_42%)]" />
-        <div
-          className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1.5px_rgba(0,0,0,0.55)]"
-          style={{ borderRadius: "inherit" }}
-        />
+        {/* Cover glass: a faint, wide glare from the top left */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(122deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.015)_20%,rgba(255,255,255,0)_34%)]" />
       </div>
     </div>
   );

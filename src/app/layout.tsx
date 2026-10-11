@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 const description =
-  "Kusin knows what's in your kitchen, plans Nigerian and Polish meals for everyone at the table, and changes course when someone says not tonight.";
+  "Tell Kusin what your family loves, from jollof to ramen. It plans every meal around what's already at home and changes course when someone says not tonight.";
 
 export const metadata: Metadata = {
   title: "Kusin — A friend in the kitchen",
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   applicationName: "Kusin",
   keywords: [
     "family meal planner",
-    "Nigerian recipes",
-    "Polish recipes",
+    "any cuisine",
+    "recipes from what you have",
     "receipt scanner",
     "pantry tracker",
     "shopping list",

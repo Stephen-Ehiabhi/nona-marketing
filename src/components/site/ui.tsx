@@ -219,6 +219,7 @@ export function PhoneFrame({
   eager = false,
   tone = "graphite",
   shadow = true,
+  overlay,
 }: {
   src: string;
   alt: string;
@@ -226,6 +227,8 @@ export function PhoneFrame({
   eager?: boolean;
   tone?: keyof typeof PHONE_TONES;
   shadow?: boolean;
+  /** Rendered on the glass, clipped to the display (e.g. a light sweep). */
+  overlay?: ReactNode;
 }) {
   const t = PHONE_TONES[tone];
   const id = `pf-${tone}`;
@@ -328,6 +331,7 @@ export function PhoneFrame({
         />
         {/* Cover glass: a faint, wide glare from the top left */}
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(122deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.015)_20%,rgba(255,255,255,0)_34%)]" />
+        {overlay}
       </div>
     </div>
   );

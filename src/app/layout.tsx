@@ -1,41 +1,53 @@
-import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Figtree, Inter } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+const figtree = Figtree({
+  variable: "--font-figtree",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700", "800"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
+
+const description =
+  "Kusin knows what's in your kitchen, plans Nigerian and Polish meals for everyone at the table, and changes course when someone says not tonight.";
 
 export const metadata: Metadata = {
-  title: "Nona — Scan. Plan. Cook.",
-  description:
-    "Point your camera at your kitchen. Nona plans your meals with AI. Scan your fridge, get personalized dinner ideas, and cook with a live AI chef. Less waste, better meals, zero guesswork.",
+  title: "Kusin — A friend in the kitchen",
+  description,
+  applicationName: "Kusin",
   keywords: [
-    "meal planning app",
-    "AI kitchen assistant",
-    "food waste reduction",
-    "recipe suggestions",
-    "smart cooking",
-    "fridge scanner",
-    "inventory tracking",
-    "shopping list generator",
+    "family meal planner",
+    "Nigerian recipes",
+    "Polish recipes",
+    "receipt scanner",
+    "pantry tracker",
+    "shopping list",
+    "postpartum meals",
   ],
   openGraph: {
-    title: "Nona — Scan. Plan. Cook.",
-    description:
-      "Point your camera at your kitchen. Nona plans your meals with AI.",
+    title: "Kusin — A friend in the kitchen",
+    description,
     type: "website",
+    siteName: "Kusin",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kusin — A friend in the kitchen",
+    description,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f7f5f2",
 };
 
 export default function RootLayout({
@@ -45,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fraunces.variable} ${jakarta.variable} antialiased`}>
+      <body className={`${figtree.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>

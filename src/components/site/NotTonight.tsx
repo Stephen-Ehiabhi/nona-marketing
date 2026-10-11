@@ -32,7 +32,7 @@ const REASONS: { label: string; alts: Dish[] }[] = [
     alts: [
       { name: "Pierogi ruskie", key: "pierogi", why: "Comfort food · from the freezer" },
       { name: "Suya with salad", key: "suya", why: "Nut-free for Tobi · 30 min" },
-      { name: "Beef stew with rice", key: "beefStew", why: "From Sunday's batch" },
+      { name: "Shoyu ramen", key: "ramen", why: "Comfort in a bowl · 30 min" },
     ],
   },
   {
@@ -46,9 +46,9 @@ const REASONS: { label: string; alts: Dish[] }[] = [
   {
     label: "Craving something",
     alts: [
+      { name: "Chicken tacos", key: "tacos", why: "Build your own", shop: "+1 item: tortillas" },
       { name: "Suya skewers", key: "suya", why: "Smoky and spicy", shop: "+1 item: red onions" },
-      { name: "Party jollof", key: "jollof", why: "Saturday-night energy" },
-      { name: "Dodo", key: "plantain", why: "Sweet, ripe plantain" },
+      { name: "Pad kra pao", key: "padKraPao", why: "Hot, quick, 20 min" },
     ],
   },
 ];

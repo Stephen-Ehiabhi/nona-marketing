@@ -1,59 +1,170 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-background: #FFFFFF;
-  --color-foreground: #000000;
+/* Kusin tokens — mirror lib/core/theme/app_colors.dart in the app. */
+@theme {
+  --color-paper: #f7f5f2;
+  --color-card: #ffffff;
+  --color-surface: #efece8;
+  --color-ink: #0f0e0d;
+  --color-ink2: #585451;
+  --color-ink3: #8c8783;
+  --color-line: rgba(38, 38, 38, 0.12);
 
-  --color-black: #000000;
-  --color-white: #FFFFFF;
-  --color-gray-50: #FAFAFA;
-  --color-gray-100: #F5F5F5;
-  --color-gray-200: #E5E5E5;
-  --color-gray-300: #D4D4D4;
-  --color-gray-400: #A3A3A3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
-  --color-gray-950: #0a0a0a;
+  --color-forest: #2f5a3c;
+  --color-forest-deep: #1f4029;
+  --color-forest-soft: #e2eee3;
+  --color-castiron: #1e3219;
+  --color-castiron-deep: #132210;
+  --color-mark: #2c4625;
+  --color-sage: #8dc29e;
 
-  --font-sans: var(--font-jakarta);
-  --font-serif: var(--font-fraunces);
+  --color-warn: #b86e0e;
+  --color-warn-soft: #fff4e2;
+  --color-risk: #c23b3b;
+
+  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
+html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--color-white);
-  color: var(--color-black);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* Glassmorphism navbar */
-.glass-nav {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+::selection {
+  background: var(--color-forest-soft);
+  color: var(--color-ink);
 }
 
-/* Floating phone */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-
-.phone-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* 16" MacBook Pro (1728px CSS width) — scale up to match 125% zoom feel */
-@media (min-width: 1700px) and (max-width: 1800px) {
-  html {
-    zoom: 1.25;
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
   }
+
+  /* Fluid display sizes: scale with the viewport instead of jumping at
+     breakpoints. The hero also respects height, so short laptop screens
+     still show the call to action. */
+  .h-hero {
+    font-size: clamp(50px, min(8.6vw, 11.5vh), 108px);
+    line-height: 0.96;
+  }
+  .h-section {
+    font-size: clamp(36px, calc(3.8vw + 20px), 64px);
+    line-height: 1.02;
+  }
+  .h-feature {
+    font-size: clamp(42px, calc(5vw + 20px), 88px);
+    line-height: 1;
+  }
+  .h-step {
+    font-size: clamp(30px, calc(1.6vw + 22px), 44px);
+    line-height: 1.05;
+  }
+
+  /* The one italic word in a headline carries the accent. */
+  .accent-word {
+    font-style: italic;
+    background: linear-gradient(135deg, #3e6e4b 0%, #2f5a3c 55%, #1f4029 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 0.06em;
+  }
+
+  .accent-word-light {
+    font-style: italic;
+    background: linear-gradient(135deg, #e4f1e7 0%, #b9dcc2 50%, #8dc29e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 0.06em;
+  }
+
+  /* Glass, only ever over photography or the brand green. */
+  .glass {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .glass-dark {
+    background: rgba(15, 14, 13, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  .glass-paper {
+    background: rgba(247, 245, 242, 0.8);
+    border: 1px solid rgba(38, 38, 38, 0.08);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Slow zoom on hero photos. */
+@keyframes kenburns {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.14); }
+}
+.kenburns {
+  animation: kenburns 14s ease-out forwards;
+}
+
+/* Hero entrance: plain CSS so it runs before the page hydrates. */
+@keyframes rise {
+  from { transform: translateY(105%); }
+  to { transform: none; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Dish rail drifts sideways. */
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.drift {
+  animation: drift 70s linear infinite;
+}
+.drift:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .kenburns, .drift, .rise, .fade-up { animation: none; }
 }

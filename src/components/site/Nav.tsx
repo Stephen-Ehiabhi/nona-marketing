@@ -29,7 +29,7 @@ export default function Nav() {
   const solid = scrolled || menu;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-4 md:pt-4">
+    <header data-site-nav className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-4 md:pt-4">
       <motion.nav
         initial={false}
         animate={{

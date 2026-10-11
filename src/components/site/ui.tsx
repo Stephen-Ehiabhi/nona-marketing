@@ -5,6 +5,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode, CSSProperties } from "react";
 
 export const EASE = [0.16, 1, 0.3, 1] as const;
+/** Crisp deceleration for entrances: quick start, firm stop. */
+export const EASE_IN_VIEW = [0.2, 0, 0, 1] as const;
 
 /* ------------------------------------------------------------------ */
 /* Brand                                                               */
@@ -157,7 +159,7 @@ export function Eyebrow({
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y = 20,
   className,
   as = "div",
 }: {
@@ -174,8 +176,8 @@ export function Reveal({
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay, ease: EASE }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5, delay, ease: EASE_IN_VIEW }}
     >
       {children}
     </M>

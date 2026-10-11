@@ -130,7 +130,7 @@ export default function NotTonight() {
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.7, ease: EASE }}
+                transition={{ duration: 0.5, ease: EASE }}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </AnimatePresence>

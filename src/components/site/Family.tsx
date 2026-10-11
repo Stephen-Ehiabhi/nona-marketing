@@ -123,7 +123,7 @@ export default function Family() {
 
           <div className="mt-16 grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
             {POINTS.map((p, n) => (
-              <Reveal key={p.title} delay={n * 0.05} className={n === 2 ? "sm:col-span-2 lg:col-span-1" : undefined}>
+              <Reveal key={p.title} delay={n * 0.1} className={n === 2 ? "sm:col-span-2 lg:col-span-1" : undefined}>
                 <span className="flex h-11 w-11 items-center justify-center rounded-[14px] bg-white/10 text-white">
                   <Icon name={p.icon} size={20} />
                 </span>

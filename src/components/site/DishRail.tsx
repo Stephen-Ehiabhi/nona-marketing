@@ -38,7 +38,7 @@ function DishCard({ d }: { d: (typeof DISHES)[number] }) {
         src={photo(d.key, 700)}
         alt={d.name}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.05]"
       />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(0deg,rgba(15,14,13,0.6),rgba(15,14,13,0))]" />
       <span className="absolute left-1/2 top-4 max-w-[86%] -translate-x-1/2 truncate whitespace-nowrap rounded-full bg-card px-4 py-2 text-[14px] font-semibold text-ink shadow-[0_4px_12px_rgba(15,14,13,0.12)]">

@@ -151,7 +151,7 @@ export default function HowItWorks() {
                     initial={{ opacity: 0, y: 24, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -24, scale: 0.98 }}
-                    transition={{ duration: 0.6, ease: EASE }}
+                    transition={{ duration: 0.4, ease: EASE }}
                   >
                     <PhoneFrame src={current.screen} alt={current.alt} />
                   </motion.div>
@@ -162,7 +162,7 @@ export default function HowItWorks() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 10 }}
-                    transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
+                    transition={{ duration: 0.35, delay: 0.15, ease: EASE }}
                     className="absolute -right-14 w-max max-w-[260px] xl:-right-24"
                     style={{ top: current.floatTop ?? "58%" }}
                   >

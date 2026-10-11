@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kusin — marketing site
 
-## Getting Started
+The landing page for **Kusin**, a friend in the kitchen: a family kitchen assistant that knows what's at home, plans meals from any cuisine the family loves for everyone at the table, and changes course when someone says not tonight.
 
-First, run the development server:
+Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · framer-motion · Firebase (beta signups).
+
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/page.tsx` — the page, section by section
+- `src/components/site/` — the sections (Hero, DishRail, HowItWorks, Week, NotTonight, Family, Showcase, Trust, FAQ, FinalCTA, Footer) and shared bits in `ui.tsx` (Kusin mark, icons, phone frame, reveal)
+- `src/components/SignupModal.tsx`, `BetaSignup.tsx` — the beta signup; answers go to the `beta_signups` collection in Firestore
+- `src/lib/photos.ts` — food photography (Pexels)
+- `src/app/globals.css` — Kusin tokens and fluid type sizes
+- `public/app/` — real app screenshots
 
-## Learn More
+## Brand rules
 
-To learn more about Next.js, take a look at the following resources:
+These match the app's design system (`CLAUDE.md` in the app repo):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Ink on warm paper (`#F7F5F2`); actions in Kusin Forest green (`#2F5A3C`); deep green (`#1E3219`) with one oversized mark for brand sections.
+- Figtree for display, Inter for text. One italic word per headline may carry the green accent.
+- **No stock people.** Food, ingredients and kitchen scenes only (hands are fine). Check new photos for faces before adding them.
+- App screenshots come from the simulator with demo avatars blanked.
+- No invented testimonials, stats or prices.

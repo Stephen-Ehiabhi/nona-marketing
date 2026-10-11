@@ -1,6 +1,6 @@
 # Kusin — marketing site
 
-The landing page for **Kusin**, a friend in the kitchen: a family kitchen assistant that knows what's at home, plans Nigerian and Polish meals for everyone at the table, and changes course when someone says not tonight.
+The landing page for **Kusin**, a friend in the kitchen: a family kitchen assistant that knows what's at home, plans meals from any cuisine the family loves for everyone at the table, and changes course when someone says not tonight.
 
 Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · framer-motion · Firebase (beta signups).
 

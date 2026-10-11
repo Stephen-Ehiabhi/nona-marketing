@@ -163,8 +163,11 @@ body {
 .drift:hover {
   animation-play-state: paused;
 }
+.drift-reverse {
+  animation: drift 90s linear infinite reverse;
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .kenburns, .drift, .rise, .fade-up { animation: none; }
+  .kenburns, .drift, .drift-reverse, .rise, .fade-up { animation: none; }
 }

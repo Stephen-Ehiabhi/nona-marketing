@@ -93,18 +93,41 @@ export default function HowItWorks() {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // The step whose middle is nearest the middle of the viewport is active.
+  // Computed from scroll position (not IntersectionObserver) so fast jumps
+  // and anchor links still land on the right screen.
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.step));
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    refs.current.forEach((el) => el && obs.observe(el));
-    return () => obs.disconnect();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const mid = window.innerHeight / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      refs.current.forEach((el, n) => {
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = n;
+        }
+      });
+      setActive(best);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
+
+  const current = STEPS[active] ?? STEPS[0];
 
   return (
     <section id="how" className="relative bg-card py-24 md:py-32">
@@ -130,7 +153,7 @@ export default function HowItWorks() {
                     exit={{ opacity: 0, y: -24, scale: 0.98 }}
                     transition={{ duration: 0.6, ease: EASE }}
                   >
-                    <PhoneFrame src={STEPS[active].screen} alt={STEPS[active].alt} />
+                    <PhoneFrame src={current.screen} alt={current.alt} />
                   </motion.div>
                 </AnimatePresence>
                 <AnimatePresence mode="wait">
@@ -141,9 +164,9 @@ export default function HowItWorks() {
                     exit={{ opacity: 0, x: 10 }}
                     transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
                     className="absolute -right-14 w-max max-w-[260px] xl:-right-24"
-                    style={{ top: STEPS[active].floatTop ?? "58%" }}
+                    style={{ top: current.floatTop ?? "58%" }}
                   >
-                    {STEPS[active].floating}
+                    {current.floating}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -158,7 +181,6 @@ export default function HowItWorks() {
                 ref={(el) => {
                   refs.current[n] = el;
                 }}
-                data-step={n}
                 className="flex flex-col justify-center py-10 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-12 lg:flex lg:min-h-[78vh] lg:py-0"
               >
                 <motion.div

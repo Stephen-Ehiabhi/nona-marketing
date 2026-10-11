@@ -11,6 +11,8 @@ const STEPS: {
   alt: string;
   tags: { icon: IconName; label: string }[];
   floating: ReactNode;
+  /** Where the floating card sits, as a share of the phone's height. */
+  floatTop?: string;
 }[] = [
   {
     title: "Snap the receipt",
@@ -54,9 +56,10 @@ const STEPS: {
   },
   {
     title: "Cook tonight",
-    body: "One suggestion when you open the app, with the reasons it fits. Cook it step by step with tap-to-start timers, or say not now and pick from three that do. Finishing a meal takes it out of stock.",
-    screen: "/app/today.jpg",
-    alt: "Kusin Today screen suggesting catfish pepper soup for four",
+    body: "One suggestion when you open the app, with the reasons it fits. Cook it one step at a time with tap-to-start timers, or say not now and pick from three that do. Finishing a meal takes it out of stock.",
+    screen: "/app/cookstep.jpg",
+    floatTop: "45%",
+    alt: "Kusin cooking mode: step 2 of 5 with a 15-minute timer running",
     tags: [
       { icon: "chefHat", label: "Step by step" },
       { icon: "timer", label: "Timers" },
@@ -64,20 +67,11 @@ const STEPS: {
     ],
     floating: (
       <div className="rounded-[20px] border border-line bg-card p-3.5 shadow-[0_18px_40px_-18px_rgba(15,14,13,0.3)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink3">Who&apos;s eating</p>
-        <div className="mt-2.5 flex gap-1.5">
-          {["A", "A", "G", "T"].map((l, n) => (
-            <span
-              key={n}
-              className={`flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#2a2826] text-[14px] font-semibold text-white ${
-                n === 3 ? "opacity-35" : ""
-              }`}
-            >
-              {l}
-            </span>
-          ))}
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink3">Finished cooking</p>
+        <div className="mt-2.5 space-y-2">
+          <Row name="Catfish" sub="800 g used" right={<Chip tone="forest">Kitchen updated</Chip>} />
+          <Row name="Yam" sub="500 g used · 1 left" right={<Icon name="check" size={16} className="text-forest" />} />
         </div>
-        <p className="mt-2 text-[12.5px] font-medium text-ink2">3 of 4 tonight · portions for 3</p>
       </div>
     ),
   },
@@ -146,7 +140,8 @@ export default function HowItWorks() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 10 }}
                     transition={{ duration: 0.5, delay: 0.25, ease: EASE }}
-                    className="absolute -right-14 top-[58%] w-max max-w-[260px] xl:-right-24"
+                    className="absolute -right-14 w-max max-w-[260px] xl:-right-24"
+                    style={{ top: STEPS[active].floatTop ?? "58%" }}
                   >
                     {STEPS[active].floating}
                   </motion.div>
@@ -193,7 +188,10 @@ export default function HowItWorks() {
                   <div className="absolute top-10 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(141,194,158,0.35)_0%,rgba(141,194,158,0)_68%)]" />
                   <div className="relative w-[260px] sm:w-[280px] md:w-[250px]">
                     <PhoneFrame src={s.screen} alt={s.alt} />
-                    <div className="absolute -right-6 top-[62%] w-max max-w-[260px] sm:-right-16 md:-right-6">
+                    <div
+                      className="absolute -right-6 w-max max-w-[260px] sm:-right-16 md:-right-6"
+                      style={{ top: s.floatTop ?? "62%" }}
+                    >
                       {s.floating}
                     </div>
                   </div>

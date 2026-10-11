@@ -182,31 +182,115 @@ export function Reveal({
   );
 }
 
-/** Real app screenshot in an iPhone-shaped frame. The screenshot already
- *  carries the status bar and Dynamic Island. */
+/* iPhone 17 Pro proportions in a 1000-unit-wide body (buttons stick out
+ * 12 units each side, hence the 1024-wide viewBox). Screen is 1206 x 2622
+ * px, the body adds a 46-unit black border and a 14-unit metal band. */
+const BODY_H = 2066;
+const SCREEN = { x: 46, y: 46, w: 908, h: 1974, r: 124 };
+const PHONE_TONES = {
+  graphite: {
+    band: ["#5d5e63", "#2b2c2f", "#1b1c1e", "#2e2f33", "#66676c"],
+    edge: "rgba(255,255,255,0.42)",
+    button: ["#2a2b2e", "#6a6b70", "#232427"],
+    antenna: "#8d8e93",
+  },
+  silver: {
+    band: ["#fbfbfb", "#d4d5d7", "#b9babd", "#d9dadc", "#f5f5f6"],
+    edge: "rgba(255,255,255,0.9)",
+    button: ["#a9aaad", "#f1f1f2", "#9c9da0"],
+    antenna: "#e9e9ea",
+  },
+} as const;
+
+/** A real app screenshot in a realistic iPhone 17 Pro: metal band with
+ *  edge highlights, black border, side buttons, antenna lines, glass glare
+ *  and a two-layer shadow. The screenshot carries its own status bar and
+ *  Dynamic Island. */
 export function PhoneFrame({
   src,
   alt,
   className = "",
   eager = false,
+  tone = "graphite",
+  shadow = true,
 }: {
   src: string;
   alt: string;
   className?: string;
   eager?: boolean;
+  tone?: keyof typeof PHONE_TONES;
+  shadow?: boolean;
 }) {
+  const t = PHONE_TONES[tone];
+  const id = `pf-${tone}`;
+  const pct = (v: number, of: number) => `${(v / of) * 100}%`;
   return (
     <div
-      className={`relative bg-[#0f0e0d] p-[2.6%] shadow-[0_50px_100px_-30px_rgba(15,14,13,0.55),0_18px_36px_-18px_rgba(15,14,13,0.35)] ring-1 ring-black/60 ${className}`}
-      style={{ aspectRatio: "1 / 2.113", borderRadius: "13.6% / 6.45%" }}
+      className={`relative ${className}`}
+      style={{
+        aspectRatio: `1024 / ${BODY_H}`,
+        filter: shadow
+          ? "drop-shadow(0 46px 48px rgba(15,14,13,0.28)) drop-shadow(0 10px 14px rgba(15,14,13,0.22))"
+          : undefined,
+      }}
     >
+      <svg
+        viewBox={`-12 0 1024 ${BODY_H}`}
+        className="absolute inset-0 h-full w-full"
+        aria-hidden
+      >
+        <defs>
+          <linearGradient id={`${id}-band`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor={t.band[0]} />
+            <stop offset="0.18" stopColor={t.band[1]} />
+            <stop offset="0.5" stopColor={t.band[2]} />
+            <stop offset="0.82" stopColor={t.band[3]} />
+            <stop offset="1" stopColor={t.band[4]} />
+          </linearGradient>
+          <linearGradient id={`${id}-btn`} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor={t.button[0]} />
+            <stop offset="0.55" stopColor={t.button[1]} />
+            <stop offset="1" stopColor={t.button[2]} />
+          </linearGradient>
+          <linearGradient id={`${id}-btn-r`} x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0" stopColor={t.button[0]} />
+            <stop offset="0.55" stopColor={t.button[1]} />
+            <stop offset="1" stopColor={t.button[2]} />
+          </linearGradient>
+        </defs>
+
+        {/* Side buttons: action, volume up, volume down (left); side button
+            and Camera Control (right). */}
+        <rect x="-9" y="372" width="14" height="104" rx="6" fill={`url(#${id}-btn)`} />
+        <rect x="-9" y="548" width="14" height="182" rx="6" fill={`url(#${id}-btn)`} />
+        <rect x="-9" y="762" width="14" height="182" rx="6" fill={`url(#${id}-btn)`} />
+        <rect x="995" y="640" width="14" height="292" rx="6" fill={`url(#${id}-btn-r)`} />
+        <rect x="997" y="1240" width="11" height="214" rx="5" fill={`url(#${id}-btn-r)`} />
+
+        {/* Metal band and black border */}
+        <rect x="0" y="0" width="1000" height={BODY_H} rx="170" fill={`url(#${id}-band)`} />
+        <rect x="2.5" y="2.5" width="995" height={BODY_H - 5} rx="167.5" fill="none" stroke={t.edge} strokeWidth="2.5" />
+        <rect x="13" y="13" width="974" height={BODY_H - 26} rx="157" fill="#030303" />
+        <rect x="13" y="13" width="974" height={BODY_H - 26} rx="157" fill="none" stroke="rgba(0,0,0,0.85)" strokeWidth="3" />
+
+        {/* Antenna lines across the band */}
+        <rect x="0" y="232" width="13" height="7" fill={t.antenna} opacity="0.55" />
+        <rect x="987" y="232" width="13" height="7" fill={t.antenna} opacity="0.55" />
+        <rect x="0" y={BODY_H - 239} width="13" height="7" fill={t.antenna} opacity="0.55" />
+        <rect x="987" y={BODY_H - 239} width="13" height="7" fill={t.antenna} opacity="0.55" />
+        <rect x="300" y={BODY_H - 13} width="7" height="13" fill={t.antenna} opacity="0.55" />
+      </svg>
+
+      {/* Display */}
       <div
-        className="pointer-events-none absolute inset-[0.6%] ring-1 ring-white/10"
-        style={{ borderRadius: "13.2% / 6.25%" }}
-      />
-      <div
-        className="relative h-full w-full overflow-hidden bg-ink"
-        style={{ borderRadius: "11.7% / 5.4%" }}
+        className="absolute overflow-hidden bg-ink"
+        style={{
+          left: pct(SCREEN.x + 12, 1024),
+          top: pct(SCREEN.y, BODY_H),
+          width: pct(SCREEN.w, 1024),
+          height: pct(SCREEN.h, BODY_H),
+          borderRadius: `${pct(SCREEN.r, SCREEN.w)} / ${pct(SCREEN.r, SCREEN.h)}`,
+        }}
       >
         <img
           src={src}
@@ -214,6 +298,12 @@ export function PhoneFrame({
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           className="h-full w-full object-cover object-top"
+        />
+        {/* Cover glass: a soft diagonal glare and a hairline at the edge */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(255,255,255,0.13)_0%,rgba(255,255,255,0.04)_26%,rgba(255,255,255,0)_42%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1.5px_rgba(0,0,0,0.55)]"
+          style={{ borderRadius: "inherit" }}
         />
       </div>
     </div>

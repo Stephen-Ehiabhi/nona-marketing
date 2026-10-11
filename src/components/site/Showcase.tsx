@@ -92,23 +92,20 @@ export default function Showcase() {
           </p>
         </Reveal>
 
-        {/* Phones: one in front, two angled behind it */}
-        <div
-          className="relative mx-auto mt-16 flex max-w-[1000px] items-center justify-center md:mt-20"
-          style={{ perspective: "2400px" }}
-        >
-          <motion.div style={{ y: sideY }} className="relative z-0 -mr-[8%] hidden w-[31%] max-w-[290px] sm:block">
-            <div style={{ transform: "rotateY(24deg) rotateZ(-1.5deg)" }}>
-              <PhoneFrame tone="silver" src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
-            </div>
+        {/* Phones: one in front, two smaller ones tucked behind it */}
+        <div className="relative mx-auto mt-16 flex max-w-[1000px] items-start justify-center md:mt-20">
+          <div
+            aria-hidden
+            className="absolute -bottom-6 left-1/2 h-16 w-[70%] -translate-x-1/2 rounded-[50%] bg-black/45 blur-2xl"
+          />
+          <motion.div style={{ y: sideY }} className="relative z-0 -mr-[6%] mt-[9%] hidden w-[29%] max-w-[270px] sm:block">
+            <PhoneFrame src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
           </motion.div>
-          <motion.div style={{ y: midY }} className="relative z-10 w-[72%] max-w-[330px] sm:w-[36%]">
+          <motion.div style={{ y: midY }} className="relative z-10 w-[72%] max-w-[330px] sm:w-[35%]">
             <PhoneFrame src="/app/today.jpg" alt="Kusin Today: tonight's dinner suggestion" />
           </motion.div>
-          <motion.div style={{ y: sideY }} className="relative z-0 -ml-[8%] hidden w-[31%] max-w-[290px] sm:block">
-            <div style={{ transform: "rotateY(-24deg) rotateZ(1.5deg)" }}>
-              <PhoneFrame tone="silver" src="/app/plan.jpg" alt="Kusin week plan: seven days planned" />
-            </div>
+          <motion.div style={{ y: sideY }} className="relative z-0 -ml-[6%] mt-[9%] hidden w-[29%] max-w-[270px] sm:block">
+            <PhoneFrame src="/app/plan.jpg" alt="Kusin week plan: seven days planned" />
           </motion.div>
         </div>
 

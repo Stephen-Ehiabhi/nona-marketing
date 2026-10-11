@@ -16,7 +16,7 @@ const FAQS = [
   },
   {
     q: "Which cuisines does it cook?",
-    a: "Nigerian and Polish home cooking first, with Italian, Indian, Chinese, Ghanaian and more when you fancy a change. Everyone in the household can have their own favourites.",
+    a: "Any you like. Pick from 170 cuisines when you set up, from Nigerian and Polish to Japanese, Mexican, Indian and Ethiopian, and change them whenever you want in settings. Kusin plans with the dishes your family actually eats.",
   },
   {
     q: "Can the whole family use it?",

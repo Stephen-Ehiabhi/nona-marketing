@@ -32,7 +32,7 @@ export default function Trust() {
         </Reveal>
         <div className="mt-12 grid gap-4 lg:grid-cols-3">
           {POINTS.map((p, n) => (
-            <Reveal key={p.title} delay={n * 0.05}>
+            <Reveal key={p.title} delay={n * 0.1}>
               <div className="h-full rounded-[24px] border border-line bg-card p-6 md:flex md:gap-6 md:p-7 lg:block">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] bg-forest-soft text-forest">
                   <Icon name={p.icon} size={22} />

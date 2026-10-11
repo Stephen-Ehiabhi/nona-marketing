@@ -1,8 +1,11 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BetaSignup from "./BetaSignup";
+import { Icon, EASE } from "./site/ui";
+import { photo } from "@/lib/photos";
 
 const ModalContext = createContext<{
   open: () => void;
@@ -16,9 +19,20 @@ export function useSignupModal() {
 
 export function SignupModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen, close]);
 
   return (
     <ModalContext.Provider value={{ open, close, isOpen }}>
@@ -27,46 +41,60 @@ export function SignupModalProvider({ children }: { children: React.ReactNode })
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.25 }}
               onClick={close}
-              className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md"
+              className="fixed inset-0 z-[100] bg-ink/45 backdrop-blur-[6px]"
             />
 
-            {/* Modal */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 30 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-0 z-[101] flex items-center justify-center p-4"
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.4, ease: EASE }}
+              className="fixed inset-0 z-[101] flex items-end justify-center md:items-center md:p-6"
               onClick={close}
             >
               <div
-                className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] shadow-[0_40px_100px_rgba(0,0,0,0.6)]"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Join the Kusin beta"
                 onClick={(e) => e.stopPropagation()}
+                className="relative flex max-h-[92svh] w-full flex-col overflow-hidden rounded-t-[28px] bg-paper shadow-[0_40px_120px_rgba(15,14,13,0.35)] md:max-w-[920px] md:flex-row md:rounded-[32px] md:p-2.5"
               >
-                {/* Gradient border effect */}
-                <div className="absolute inset-0 rounded-[28px] bg-gradient-to-b from-white/[0.12] to-white/[0.03] p-px">
-                  <div className="w-full h-full rounded-[27px] bg-[#0a0a0a]" />
+                {/* Photo panel */}
+                <div className="relative h-36 shrink-0 overflow-hidden md:h-auto md:w-[44%] md:rounded-[24px]">
+                  <img
+                    src={photo("handsChopping", 1000)}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,14,13,0.05)_40%,rgba(15,14,13,0.55)_100%)]" />
+                  <div className="absolute inset-x-4 bottom-4 hidden md:block">
+                    <div className="glass rounded-[20px] p-4 text-white">
+                      <p className="display text-[18px] font-semibold leading-snug">
+                        Founding families shape what Kusin cooks next.
+                      </p>
+                      <p className="mt-1.5 text-[13px] text-white/75">
+                        Free during the beta · iPhone and Android
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="relative p-7 md:p-9">
-                  {/* Close */}
-                  <button
-                    onClick={close}
-                    className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white/25 hover:text-white/60 hover:bg-white/[0.06] transition-all cursor-pointer z-10"
-                  >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 6L6 18M6 6l12 12" />
-                    </svg>
-                  </button>
+                <button
+                  onClick={close}
+                  aria-label="Close"
+                  className="glass absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-white md:border-line md:bg-surface md:text-ink md:backdrop-blur-none"
+                >
+                  <Icon name="x" size={18} />
+                </button>
 
-                  <BetaSignup theme="dark" onComplete={close} />
+                <div className="overflow-y-auto px-6 pb-8 pt-6 md:flex-1 md:px-10 md:py-10">
+                  <BetaSignup onComplete={close} />
                 </div>
               </div>
             </motion.div>

@@ -16,7 +16,7 @@ const POINTS: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "heart",
     title: "No guilt on the menu",
-    body: "No streaks, no calorie headlines, no “bad food”. Jollof and pierogi are equally welcome — Kusin just suggests a gentler way to cook them.",
+    body: "No streaks, no calorie headlines, no “bad food”. Jollof, pierogi and pad kra pao are all equally welcome — Kusin just suggests a gentler way to cook them.",
   },
 ];
 

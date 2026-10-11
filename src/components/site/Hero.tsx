@@ -22,16 +22,22 @@ const SLIDES: {
     position: "center 60%",
   },
   {
-    key: "pierogi",
-    dish: "Pierogi ruskie with fried onion",
-    cuisine: "Polish",
-    why: ["Twaróg needs using", "Kids' favourite", "Batch-friendly"],
+    key: "ramen",
+    dish: "Shoyu ramen with soft eggs",
+    cuisine: "Japanese",
+    why: ["Eggs + spring onions at home", "Kids' favourite", "30 min"],
   },
   {
-    key: "jollof",
-    dish: "Party jollof with fried plantain",
-    cuisine: "Nigerian",
-    why: ["Rice + tomatoes at home", "Feeds 4, plus lunch", "50 min"],
+    key: "spaghetti",
+    dish: "Spaghetti al pomodoro",
+    cuisine: "Italian",
+    why: ["Tomatoes need using", "One pot", "20 min"],
+  },
+  {
+    key: "tacos",
+    dish: "Chicken tacos with pickled onion",
+    cuisine: "Mexican",
+    why: ["Chicken thighs at home", "Build your own", "30 min"],
   },
 ];
 
@@ -124,8 +130,9 @@ export default function Hero() {
               className="fade-up mt-6 max-w-[520px] text-[17px] leading-[1.55] text-white/80 md:text-[19px]"
               style={{ animationDelay: "0.5s" }}
             >
-              Kusin knows what&apos;s in your kitchen, plans Nigerian and Polish meals for
-              everyone at the table, and changes course when someone says not tonight.
+              Tell Kusin what your family loves, from jollof to ramen. It plans every meal
+              around what&apos;s already at home and changes course when someone says not
+              tonight.
             </p>
 
             <div

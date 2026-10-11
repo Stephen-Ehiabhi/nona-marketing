@@ -92,16 +92,23 @@ export default function Showcase() {
           </p>
         </Reveal>
 
-        {/* Phones */}
-        <div className="relative mx-auto mt-16 flex max-w-[980px] items-start justify-center gap-4 md:mt-20 md:gap-8">
-          <motion.div style={{ y: sideY }} className="hidden w-[30%] max-w-[270px] -rotate-[5deg] pt-16 sm:block">
-            <PhoneFrame src="/app/kitchen.jpg" alt="Kusin Kitchen: stock by fridge, pantry and freezer" />
+        {/* Phones: one in front, two angled behind it */}
+        <div
+          className="relative mx-auto mt-16 flex max-w-[1000px] items-center justify-center md:mt-20"
+          style={{ perspective: "2400px" }}
+        >
+          <motion.div style={{ y: sideY }} className="relative z-0 -mr-[8%] hidden w-[31%] max-w-[290px] sm:block">
+            <div style={{ transform: "rotateY(24deg) rotateZ(-1.5deg)" }}>
+              <PhoneFrame tone="silver" src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
+            </div>
           </motion.div>
-          <motion.div style={{ y: midY }} className="w-[72%] max-w-[310px] sm:w-[34%]">
+          <motion.div style={{ y: midY }} className="relative z-10 w-[72%] max-w-[330px] sm:w-[36%]">
             <PhoneFrame src="/app/today.jpg" alt="Kusin Today: tonight's dinner suggestion" />
           </motion.div>
-          <motion.div style={{ y: sideY }} className="hidden w-[30%] max-w-[270px] rotate-[5deg] pt-16 sm:block">
-            <PhoneFrame src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
+          <motion.div style={{ y: sideY }} className="relative z-0 -ml-[8%] hidden w-[31%] max-w-[290px] sm:block">
+            <div style={{ transform: "rotateY(-24deg) rotateZ(1.5deg)" }}>
+              <PhoneFrame tone="silver" src="/app/plan.jpg" alt="Kusin week plan: seven days planned" />
+            </div>
           </motion.div>
         </div>
 

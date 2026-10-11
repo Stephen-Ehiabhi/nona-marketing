@@ -33,22 +33,27 @@ const M = {
   stew: { name: "Beef stew with rice", key: "beefStew", mins: 60, why: ["Batch-friendly", "Covers Friday lunch"] },
   suya: { name: "Suya with salad", key: "suya", mins: 30, why: ["Nut-free yaji for Tobi", "Dad's pick"] },
   jollof: { name: "Party jollof with plantain", key: "jollof", mins: 50, why: ["Feeds 4, plus lunch"] },
+  ramen: { name: "Shoyu ramen", key: "ramen", mins: 30, why: ["Uses the eggs", "Kids' favourite"] },
+  tacos: { name: "Chicken tacos", key: "tacos", mins: 30, why: ["Chicken thighs at home", "Build your own"] },
+  spaghetti: { name: "Spaghetti al pomodoro", key: "spaghetti", mins: 20, why: ["Tomatoes need using", "One pot"] },
+  biryani: { name: "Chicken biryani", key: "biryani", mins: 60, why: ["Batch-friendly", "Covers Friday lunch"] },
+  padKraPao: { name: "Pad kra pao", key: "padKraPao", mins: 20, why: ["Quick weeknight", "Mild for Grandma"] },
 } satisfies Record<string, Meal>;
 
 const PLAN: Record<Slot, Meal>[] = [
   { Breakfast: M.ogi, Lunch: M.jollofLeft, Dinner: M.egusi },
-  { Breakfast: M.yam, Lunch: M.zurek, Dinner: M.pierogi },
+  { Breakfast: M.yam, Lunch: M.zurek, Dinner: M.ramen },
   { Breakfast: M.dodo, Lunch: M.pomidorowa, Dinner: M.pepper },
-  { Breakfast: M.ogi, Lunch: M.friedRice, Dinner: M.stew },
-  { Breakfast: M.dodo, Lunch: M.pomidorowa, Dinner: M.suya },
+  { Breakfast: M.ogi, Lunch: M.friedRice, Dinner: M.biryani },
+  { Breakfast: M.dodo, Lunch: M.spaghetti, Dinner: M.tacos },
   { Breakfast: M.ogi, Lunch: M.friedRice, Dinner: M.jollof },
-  { Breakfast: M.yam, Lunch: M.zurek, Dinner: M.pepper },
+  { Breakfast: M.yam, Lunch: M.zurek, Dinner: M.pierogi },
 ];
 
 const POOL: Record<Slot, Meal[]> = {
   Breakfast: [M.ogi, M.dodo, M.yam],
-  Lunch: [M.jollofLeft, M.zurek, M.pomidorowa, M.friedRice],
-  Dinner: [M.egusi, M.pierogi, M.pepper, M.stew, M.suya, M.jollof],
+  Lunch: [M.jollofLeft, M.zurek, M.pomidorowa, M.friedRice, M.spaghetti],
+  Dinner: [M.egusi, M.pierogi, M.pepper, M.stew, M.suya, M.jollof, M.ramen, M.tacos, M.biryani, M.padKraPao],
 };
 
 export default function Week() {

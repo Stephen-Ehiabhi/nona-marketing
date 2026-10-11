@@ -1,10 +1,18 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, type ReactNode } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useMotionValueEvent,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { photo, type PhotoKey } from "@/lib/photos";
-import { Eyebrow, Icon, KusinMark, PhoneFrame, Reveal } from "./ui";
+import { Eyebrow, Icon, type IconName, KusinMark, PhoneFrame, Reveal } from "./ui";
 
 const STORES: { store: string; items: { name: string; qty: string; home?: boolean }[] }[] = [
   {
@@ -63,17 +71,131 @@ function Tile({
   );
 }
 
-export default function Showcase() {
-  const ref = useRef<HTMLDivElement>(null);
+/** Small white card that pops in once the phones have fanned out, then
+ *  drifts gently. Static when the reader prefers less motion. */
+function FloatCard({
+  icon,
+  title,
+  sub,
+  delay,
+  drift,
+  show,
+  className,
+}: {
+  icon: IconName;
+  title: string;
+  sub: string;
+  delay: number;
+  drift: number;
+  show: boolean;
+  className: string;
+}) {
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const sideY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [80, -60]);
-  const midY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [30, -30]);
+  return (
+    <motion.div
+      className={`absolute z-20 ${className}`}
+      initial={reduce ? false : { opacity: 0, y: 18, scale: 0.9 }}
+      animate={show || reduce ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 18, scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22, delay: show ? delay : 0 }}
+    >
+      <motion.div
+        animate={reduce ? undefined : { y: [0, -7, 0] }}
+        transition={{ duration: drift, repeat: Infinity, ease: "easeInOut", delay: delay + 0.6 }}
+        className="flex items-center gap-3 rounded-[18px] border border-black/5 bg-card py-2.5 pl-2.5 pr-4 shadow-[0_20px_40px_-14px_rgba(0,0,0,0.45),0_4px_10px_-4px_rgba(0,0,0,0.2)]"
+      >
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] bg-forest-soft text-forest">
+          <Icon name={icon} size={18} />
+        </span>
+        <span className="leading-tight">
+          <span className="block whitespace-nowrap text-[13.5px] font-semibold text-ink">{title}</span>
+          <span className="block whitespace-nowrap text-[12px] text-ink3">{sub}</span>
+        </span>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/** A soft band of light that crosses the glass, then again every few
+ *  seconds, once the phones have settled. */
+function Sheen({ active }: { active: boolean }) {
+  const reduce = useReducedMotion();
+  if (reduce) return null;
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute inset-y-[-10%] left-0 w-[45%] -skew-x-12 bg-[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.16)_50%,rgba(255,255,255,0)_100%)]"
+      initial={{ x: "-140%" }}
+      animate={active ? { x: ["-140%", "340%"] } : { x: "-140%" }}
+      transition={
+        active
+          ? { duration: 1.6, delay: 0.5, ease: [0.45, 0, 0.2, 1], repeat: Infinity, repeatDelay: 6.5 }
+          : { duration: 0 }
+      }
+    />
+  );
+}
+
+function SidePhone({
+  side,
+  x,
+  rotate,
+  scale,
+  opacity,
+  children,
+}: {
+  side: "left" | "right";
+  x: MotionValue<string>;
+  rotate: MotionValue<number>;
+  scale: MotionValue<number>;
+  opacity: MotionValue<number>;
+  children: ReactNode;
+}) {
+  return (
+    <motion.div
+      style={{ x, rotate, scale, opacity, transformOrigin: side === "left" ? "100% 100%" : "0% 100%" }}
+      className={`relative z-0 mt-[9%] hidden w-[29%] max-w-[270px] sm:block ${side === "left" ? "-mr-[6%]" : "-ml-[6%]"}`}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function Showcase() {
+  const stage = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+
+  // 0 → 1 as the phones scroll up into view; springy so it feels physical.
+  const { scrollYProgress } = useScroll({ target: stage, offset: ["start 0.95", "start 0.3"] });
+  const p = useSpring(scrollYProgress, { stiffness: 110, damping: 24, mass: 0.5 });
+  const k = (from: number, to: number) => (reduce ? [to, to] : [from, to]);
+
+  // Side phones start tucked behind the centre phone and fan out.
+  const leftX = useTransform(p, [0, 1], k(78, 0), { clamp: true });
+  const leftXPct = useTransform(leftX, (v) => `${v}%`);
+  const rightXPct = useTransform(leftX, (v) => `${-v}%`);
+  const leftRotate = useTransform(p, [0, 1], k(7, 0));
+  const rightRotate = useTransform(p, [0, 1], k(-7, 0));
+  const sideScale = useTransform(p, [0, 1], k(0.86, 1));
+  const sideOpacity = useTransform(p, [0, 0.3, 1], reduce ? [1, 1, 1] : [0, 0.7, 1]);
+
+  // Centre phone rises into place.
+  const midY = useTransform(p, [0, 1], k(110, 0));
+  const midScale = useTransform(p, [0, 1], k(0.9, 1));
+  const glowOpacity = useTransform(p, [0, 1], k(0, 1));
+  const glowScale = useTransform(p, [0, 1], k(0.6, 1));
+
+  // Cards and the light sweep start once the phones have (nearly) fanned
+  // out, and step back if the reader scrolls the phones away again. The
+  // gap between the two thresholds stops them flickering at the edge.
+  const [settled, setSettled] = useState(false);
+  useMotionValueEvent(p, "change", (v) => {
+    if (v > 0.85 && !settled) setSettled(true);
+    else if (v < 0.4 && settled) setSettled(false);
+  });
 
   return (
     <section className="px-3 py-24 md:px-4 md:py-32">
       <div
-        ref={ref}
         className="relative isolate overflow-hidden rounded-[32px] bg-[linear-gradient(160deg,#1e3219_0%,#132210_100%)] px-5 pb-6 pt-20 md:px-10 md:pb-10 md:pt-28"
       >
         <KusinMark
@@ -92,21 +214,59 @@ export default function Showcase() {
           </p>
         </Reveal>
 
-        {/* Phones: one in front, two smaller ones tucked behind it */}
-        <div className="relative mx-auto mt-16 flex max-w-[1000px] items-start justify-center md:mt-20">
-          <div
+        {/* Phones: the side ones fan out from behind the centre phone as it
+            rises, then three small cards pop in around them. */}
+        <div ref={stage} className="relative mx-auto mt-16 max-w-[1000px] md:mt-20">
+          <motion.div
             aria-hidden
+            style={{ opacity: glowOpacity, scale: glowScale }}
+            className="absolute left-1/2 top-[38%] h-[70%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(141,194,158,0.38),rgba(141,194,158,0))]"
+          />
+          <motion.div
+            aria-hidden
+            style={{ opacity: glowOpacity }}
             className="absolute -bottom-6 left-1/2 h-16 w-[70%] -translate-x-1/2 rounded-[50%] bg-black/45 blur-2xl"
           />
-          <motion.div style={{ y: sideY }} className="relative z-0 -mr-[6%] mt-[9%] hidden w-[29%] max-w-[270px] sm:block">
-            <PhoneFrame src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
-          </motion.div>
-          <motion.div style={{ y: midY }} className="relative z-10 w-[72%] max-w-[330px] sm:w-[35%]">
-            <PhoneFrame src="/app/today.jpg" alt="Kusin Today: tonight's dinner suggestion" />
-          </motion.div>
-          <motion.div style={{ y: sideY }} className="relative z-0 -ml-[6%] mt-[9%] hidden w-[29%] max-w-[270px] sm:block">
-            <PhoneFrame src="/app/plan.jpg" alt="Kusin week plan: seven days planned" />
-          </motion.div>
+
+          <div className="relative flex items-start justify-center">
+            <SidePhone side="left" x={leftXPct} rotate={leftRotate} scale={sideScale} opacity={sideOpacity}>
+              <PhoneFrame src="/app/recipes.jpg" alt="Kusin Recipes: the family cookbook" />
+            </SidePhone>
+            <motion.div style={{ y: midY, scale: midScale }} className="relative z-10 w-[72%] max-w-[330px] sm:w-[35%]">
+              <PhoneFrame src="/app/today.jpg" alt="Kusin Today: tonight's dinner suggestion" overlay={<Sheen active={settled} />} />
+            </motion.div>
+            <SidePhone side="right" x={rightXPct} rotate={rightRotate} scale={sideScale} opacity={sideOpacity}>
+              <PhoneFrame src="/app/plan.jpg" alt="Kusin week plan: seven days planned" />
+            </SidePhone>
+          </div>
+
+          <FloatCard
+            icon="fridge"
+            title="19 items at home"
+            sub="4 to use first"
+            delay={0}
+            drift={5.6}
+            show={settled}
+            className="left-0 top-[16%] sm:left-[2%] sm:top-[24%]"
+          />
+          <FloatCard
+            icon="calendar"
+            title="Week planned"
+            sub="21 meals · 7 days"
+            delay={0.18}
+            drift={6.4}
+            show={settled}
+            className="hidden sm:right-[1%] sm:top-[52%] sm:block"
+          />
+          <FloatCard
+            icon="shield"
+            title="Nut-free for Tobi"
+            sub="Checked in every recipe"
+            delay={0.36}
+            drift={5.1}
+            show={settled}
+            className="hidden sm:left-[4%] sm:top-[72%] sm:block"
+          />
         </div>
 
         {/* What's inside */}
